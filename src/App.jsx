@@ -1,8 +1,21 @@
 import Header from "./components/Header";
+import Section from "./components/Section";
+import Education from "./components/Education";
+
+import "./styles/Section.css";
+import "./styles/Education.css";
 import "./styles/App.css";
 
 function App() {
-  return <Header />;
+  return (
+    <>
+      <Header />
+      <div id="education">
+        <Education />
+      </div>
+      <Section />
+    </>
+  );
 }
 
 export default App;
