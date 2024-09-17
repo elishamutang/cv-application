@@ -28,11 +28,11 @@ function Header() {
   return (
     <>
       <div id="name">
-        <input type="text" id="fullName" value={fullName} onChange={handleName} />
+        <input type="text" id="fullName" placeholder={fullName} onChange={handleName} />
       </div>
       <div id="contact">
         {contactDetails.map((item) => {
-          return <input key={item.id} id={item.id} value={item.field} onChange={handleContactChange} />;
+          return <input key={item.id} id={item.id} placeholder={item.field} onChange={handleContactChange} />;
         })}
       </div>
     </>
