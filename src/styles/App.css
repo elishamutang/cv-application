@@ -9,7 +9,7 @@ input {
   appearance: none;
   background-color: transparent;
   border: none;
-  padding: 2%;
+  padding: 2% 0;
   border: 1px solid transparent;
   border-radius: 0.5rem;
   text-align: center;
@@ -55,4 +55,13 @@ input:hover {
 .section {
   font-size: 0.8rem;
   margin-top: 1.5rem;
+}
+
+#education input,
+.section input {
+  font-size: 0.8rem;
+}
+
+.company-position input {
+  text-align: left;
 }
