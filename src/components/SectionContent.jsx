@@ -1,13 +1,54 @@
+import { useState, useRef } from "react";
+import ContentEditable from "react-contenteditable";
+
 function SectionContent() {
+  const [defaultValues, setValues] = useState({
+    organisation: "Organisation",
+    position: "Position Title",
+    city: "City",
+    state: "State",
+    from: "MMM YYYY",
+    to: "MMM YYYY",
+  });
+
+  const text = useRef("");
+
+  function handleOrganisationChange(e) {
+    setValues({ ...defaultValues, organisation: e.target.value });
+  }
+
+  function handlePositionChange(e) {
+    setValues({ ...defaultValues, position: e.target.value });
+  }
+
+  function handleBlur() {
+    console.log(text.current.innerHTML);
+  }
+
   return (
     <>
       <div className="company-position">
-        <p>Organisation</p>
-        <p>Position Title</p>
+        {/* Fix these components */}
+        <ContentEditable
+          innerRef={text}
+          html={defaultValues.organisation}
+          onBlur={handleBlur}
+          onChange={handleOrganisationChange}
+        />
+        <ContentEditable
+          innerRef={text}
+          html={defaultValues.position}
+          onBlur={handleBlur}
+          onChange={handlePositionChange}
+        />
       </div>
       <div className="location-duration">
-        <p>City, State</p>
-        <p>MMM YYYY - MMM YYYY</p>
+        <p>
+          {defaultValues.city}, {defaultValues.state}
+        </p>
+        <p>
+          {defaultValues.from} - {defaultValues.to}
+        </p>
       </div>
       <div className="content">
         <ul>
