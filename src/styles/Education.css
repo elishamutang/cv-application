@@ -1,0 +1,16 @@
+#education {
+  display: grid;
+  grid-template-areas:
+    "title title title"
+    "institution . locationDuration"
+    "content content content";
+
+  border: 1px solid red;
+  gap: 1rem;
+}
+
+.institution {
+  grid-area: institution;
+  text-align: left;
+  font-weight: bold;
+}

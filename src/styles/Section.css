@@ -1,0 +1,39 @@
+.section {
+  display: grid;
+  grid-template-areas:
+    "title title title"
+    "orgPos . locationDuration"
+    "content content content";
+
+  border: 1px solid red;
+  font-size: 1rem;
+  gap: 0.5rem;
+}
+
+.title,
+.company-position,
+.location-duration {
+  font-weight: bold;
+}
+
+.title {
+  grid-area: title;
+}
+
+.company-position {
+  grid-area: orgPos;
+}
+
+.location-duration {
+  grid-area: locationDuration;
+  text-align: right;
+}
+
+.content {
+  grid-area: content;
+}
+
+.content > ul {
+  padding-inline-start: 20px;
+  text-align: left;
+}
