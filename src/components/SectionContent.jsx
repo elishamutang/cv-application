@@ -2,6 +2,8 @@ import { useState, useRef } from "react";
 import ContentEditable from "react-contenteditable";
 
 function SectionContent() {
+  // Consider changing this to an array instead of a single object.
+  // An array of objects to allow users to add more experiences.
   const [defaultValues, setValues] = useState({
     organisation: "Organisation",
     position: "Position Title",
@@ -24,47 +26,32 @@ function SectionContent() {
     setValues({ ...defaultValues, position: e.target.value });
   }
 
-  function handleBlur() {
-    console.log(organisationText.current.innerHTML);
-    console.log(positionTitleText.current.innerHTML);
-    console.log(cityAndState.current.innerHTML);
-  }
-
   return (
     <>
       <div className="company-position">
         <ContentEditable
           innerRef={organisationText}
           html={defaultValues.organisation}
-          onBlur={handleBlur}
           onChange={handleOrganisationChange}
         />
-        <ContentEditable
-          innerRef={positionTitleText}
-          html={defaultValues.position}
-          onBlur={handleBlur}
-          onChange={handlePositionChange}
-        />
+        <ContentEditable innerRef={positionTitleText} html={defaultValues.position} onChange={handlePositionChange} />
       </div>
       <div className="location-duration">
         <ContentEditable
           innerRef={cityAndState}
           html={defaultValues.location}
-          onBlur={handleBlur}
           onChange={(e) => setValues({ ...defaultValues, location: e.target.value })}
         />
         <div className="duration">
           <ContentEditable
             innerRef={startDate}
             html={defaultValues.startDate}
-            onBlur={handleBlur}
             onChange={(e) => setValues({ ...defaultValues, startDate: e.target.value })}
           />
           -
           <ContentEditable
             innerRef={endDate}
             html={defaultValues.endDate}
-            onBlur={handleBlur}
             onChange={(e) => setValues({ ...defaultValues, endDate: e.target.value })}
           />
         </div>
