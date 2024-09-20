@@ -3,6 +3,7 @@
   padding: 1rem;
   text-align: center;
   width: 100%;
+  color: black;
 }
 
 input {
@@ -51,17 +52,28 @@ input:hover {
   text-wrap: wrap;
 }
 
-#education,
+.education-section,
 .section {
   font-size: 0.8rem;
-  margin-top: 1.5rem;
+
+  grid-template-columns: 1.5fr 0.1fr 1.5fr;
+  gap: 0.5rem;
 }
 
-#education input,
+.section,
+#education {
+  margin-top: 1.2rem;
+}
+
+.education-section input,
 .section input {
   font-size: 0.8rem;
 }
 
 .company-position input {
   text-align: left;
+}
+
+.title > input {
+  font-size: 1rem;
 }

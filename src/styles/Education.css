@@ -1,4 +1,4 @@
-#education {
+.education-section {
   display: grid;
   grid-template-areas:
     "title title title"
@@ -6,7 +6,6 @@
     "content content content";
 
   border: 1px solid red;
-  gap: 1rem;
 }
 
 .institution {
