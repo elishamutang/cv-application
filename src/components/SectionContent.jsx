@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import ContentEditable from "react-contenteditable";
 
 function SectionContent() {
@@ -12,12 +12,6 @@ function SectionContent() {
     endDate: "MMM YYYY",
   });
 
-  const organisationText = useRef("");
-  const positionTitleText = useRef("");
-  const cityAndState = useRef("");
-  const startDate = useRef("");
-  const endDate = useRef("");
-
   function handleOrganisationChange(e) {
     setValues({ ...defaultValues, organisation: e.target.value });
   }
@@ -29,28 +23,21 @@ function SectionContent() {
   return (
     <>
       <div className="company-position">
-        <ContentEditable
-          innerRef={organisationText}
-          html={defaultValues.organisation}
-          onChange={handleOrganisationChange}
-        />
-        <ContentEditable innerRef={positionTitleText} html={defaultValues.position} onChange={handlePositionChange} />
+        <ContentEditable html={defaultValues.organisation} onChange={handleOrganisationChange} />
+        <ContentEditable html={defaultValues.position} onChange={handlePositionChange} />
       </div>
       <div className="location-duration">
         <ContentEditable
-          innerRef={cityAndState}
           html={defaultValues.location}
           onChange={(e) => setValues({ ...defaultValues, location: e.target.value })}
         />
         <div className="duration">
           <ContentEditable
-            innerRef={startDate}
             html={defaultValues.startDate}
             onChange={(e) => setValues({ ...defaultValues, startDate: e.target.value })}
           />
           -
           <ContentEditable
-            innerRef={endDate}
             html={defaultValues.endDate}
             onChange={(e) => setValues({ ...defaultValues, endDate: e.target.value })}
           />
