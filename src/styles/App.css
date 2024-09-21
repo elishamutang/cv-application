@@ -62,7 +62,7 @@ input:hover {
 
 .section,
 #education {
-  margin-top: 1.2rem;
+  margin-top: 0.8rem;
 }
 
 .education-section input,
@@ -74,6 +74,7 @@ input:hover {
   text-align: left;
 }
 
-.title > input {
-  font-size: 1rem;
+.title > input,
+.title {
+  font-size: 0.8rem;
 }

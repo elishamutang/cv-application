@@ -2,7 +2,7 @@
   display: grid;
   grid-template-areas:
     "title title title"
-    "institution . locationDuration"
+    "institution . locationGraduationDate"
     "content content content";
 
   border: 1px solid red;
@@ -11,5 +11,14 @@
 .institution {
   grid-area: institution;
   text-align: left;
+}
+
+.location-graduationDate {
+  grid-area: locationGraduationDate;
+  text-align: right;
+}
+
+.institution,
+.location-graduationDate {
   font-weight: bold;
 }
