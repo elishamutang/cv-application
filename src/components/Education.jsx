@@ -1,13 +1,13 @@
 import { useState } from "react";
 import ContentEditable from "react-contenteditable";
 
-function EducationSection({ education, handleUniversityChange, className }) {
+function EducationSection({ education, handleChange }) {
   return (
     <div className="education-section">
-      <ContentEditable html={education.university} className={className} onChange={handleUniversityChange} />
-      <div className="location-duration">
-        <ContentEditable html={education.location} />
-        <p>Graduation Date</p>
+      <ContentEditable html={education.institution} className="institution" onChange={handleChange} />
+      <div className="location-graduationDate">
+        <ContentEditable html={education.location} className="location" onChange={handleChange} />
+        <ContentEditable html={education.graduationDate} className="graduationDate" onChange={handleChange} />
       </div>
       <div className="content">
         <ul>
@@ -22,31 +22,28 @@ function EducationSection({ education, handleUniversityChange, className }) {
 
 function Education() {
   const [defaultEducation, setEducation] = useState([
-    { id: 0, university: "Example University", location: "Cambridge, MA", graduationDate: "DD/MM/YYYY" },
+    { id: 0, institution: "Example University", location: "Cambridge, MA", graduationDate: "Mmm YYYY" },
   ]);
 
-  function handleUniversityChange(e, itemId) {
+  function handleChange(e, itemId) {
     setEducation(
       defaultEducation.map((item) => {
         if (item.id === itemId) {
-          return { ...defaultEducation, university: e.target.value };
+          return { ...item, [e.currentTarget.className]: e.target.value };
         } else {
-          return defaultEducation;
+          return item;
         }
       })
     );
   }
 
+  console.log(defaultEducation);
+
   return (
     <div id="education">
       <div className="title">Education</div>
       {defaultEducation.map((item) => (
-        <EducationSection
-          key={item.id}
-          education={item}
-          onChange={(e) => handleUniversityChange(e, item.id)}
-          className="institution"
-        />
+        <EducationSection education={item} handleChange={(e) => handleChange(e, item.id)} key={item.id} />
       ))}
     </div>
   );
