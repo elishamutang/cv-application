@@ -3,7 +3,8 @@
   grid-template-areas:
     "title title title"
     "institution . locationGraduationDate"
-    "content content content";
+    "content content content"
+    "addMore addMore addMore";
 
   border: 1px solid red;
 }
@@ -21,4 +22,9 @@
 .institution,
 .location-graduationDate {
   font-weight: bold;
+}
+
+.addMore {
+  grid-area: addMore;
+  margin-top: 8%;
 }
