@@ -8,8 +8,8 @@ function SectionContent() {
     organisation: "Organisation",
     position: "Position Title",
     location: "City, State",
-    startDate: "MMM YYYY",
-    endDate: "MMM YYYY",
+    startDate: "Mmm YYYY",
+    endDate: "Mmm YYYY",
   });
 
   function handleOrganisationChange(e) {
