@@ -1,7 +1,15 @@
 import { useState } from "react";
 import ContentEditable from "react-contenteditable";
 
-function EducationSection({ education, handleChange }) {
+function EducationSection({ education, educationList, handleChange }) {
+  const ShowAddBtn = () => {
+    const lastIndex = education.id + 1;
+
+    if (lastIndex === educationList.length) {
+      return <button className="addMore">Add more</button>;
+    }
+  };
+
   return (
     <div className="education-section">
       <ContentEditable html={education.institution} className="institution" onChange={handleChange} />
@@ -16,6 +24,7 @@ function EducationSection({ education, handleChange }) {
           <li>Relevant Coursework: [Note: Optional. Awards and honors can also be listed here]</li>
         </ul>
       </div>
+      <ShowAddBtn />
     </div>
   );
 }
@@ -43,7 +52,12 @@ function Education() {
     <div id="education">
       <div className="title">Education</div>
       {defaultEducation.map((item) => (
-        <EducationSection education={item} handleChange={(e) => handleChange(e, item.id)} key={item.id} />
+        <EducationSection
+          education={item}
+          educationList={defaultEducation}
+          handleChange={(e) => handleChange(e, item.id)}
+          key={item.id}
+        />
       ))}
     </div>
   );
