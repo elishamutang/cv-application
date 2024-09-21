@@ -1,37 +1,45 @@
 import { useState } from "react";
 import ContentEditable from "react-contenteditable";
 
-function EducationSection({ education, educationList, handleChange }) {
-  const ShowAddBtn = () => {
-    const lastIndex = education.id + 1;
-
-    if (lastIndex === educationList.length) {
-      return <button className="addMore">Add more</button>;
-    }
-  };
-
+function EducationContent({ content, handleContentChange }) {
   return (
-    <div className="education-section">
-      <ContentEditable html={education.institution} className="institution" onChange={handleChange} />
-      <div className="location-graduationDate">
-        <ContentEditable html={education.location} className="location" onChange={handleChange} />
-        <ContentEditable html={education.graduationDate} className="graduationDate" onChange={handleChange} />
-      </div>
-      <div className="content">
-        <ul>
-          <li>Degree, Concentration. GPA [Note: GPA is optional]</li>
-          <li>Thesis: [Note: Optional]</li>
-          <li>Relevant Coursework: [Note: Optional. Awards and honors can also be listed here]</li>
-        </ul>
-      </div>
-      <ShowAddBtn />
-    </div>
+    <li>
+      <ContentEditable html={content} onChange={handleContentChange} />
+    </li>
   );
+}
+
+function ShowAddBtn({ education, educationList }) {
+  const lastIndex = education.id + 1;
+
+  if (lastIndex === educationList.length) {
+    return <button className="addMore">Add more</button>;
+  }
 }
 
 function Education() {
   const [defaultEducation, setEducation] = useState([
-    { id: 0, institution: "Example University", location: "Cambridge, MA", graduationDate: "Mmm YYYY" },
+    {
+      id: 0,
+      institution: "Example University",
+      location: "Cambridge, MA",
+      graduationDate: "Mmm YYYY",
+      content: [
+        { id: 0, value: "Degree, Concentration. GPA [Note: GPA is optional]" },
+        { id: 1, value: "Thesis: [Note: Optional]" },
+        { id: 2, value: "Relevant Coursework: [Note: Optional. Awards and honors can also be listed here]" },
+      ],
+    },
+    {
+      id: 1,
+      institution: "Goofy Goobers",
+      location: "Austin, TX",
+      graduationDate: "Mmm YYYY",
+      content: [
+        { id: 0, value: "Testing" },
+        { id: 1, value: "Testing 123" },
+      ],
+    },
   ]);
 
   function handleChange(e, itemId) {
@@ -46,18 +54,59 @@ function Education() {
     );
   }
 
-  console.log(defaultEducation);
+  function handleContentChange(e, contentId, itemId) {
+    const newEducation = [...defaultEducation];
+
+    const newContent = newEducation.map((item) => {
+      if (item.id === itemId) {
+        const newContent = [...item.content];
+
+        newContent.map((content) => {
+          if (content.id === contentId) {
+            content.value = e.target.value;
+          }
+        });
+
+        return { ...item, content: newContent };
+      } else {
+        return item;
+      }
+    });
+
+    setEducation(newContent);
+  }
+
+  // console.log(defaultEducation);
 
   return (
     <div id="education">
       <div className="title">Education</div>
       {defaultEducation.map((item) => (
-        <EducationSection
-          education={item}
-          educationList={defaultEducation}
-          handleChange={(e) => handleChange(e, item.id)}
-          key={item.id}
-        />
+        <div key={item.id} className="education-section">
+          <ContentEditable html={item.institution} className="institution" onChange={(e) => handleChange(e, item.id)} />
+          <div className="location-graduationDate">
+            <ContentEditable html={item.location} className="location" onChange={(e) => handleChange(e, item.id)} />
+            <ContentEditable
+              html={item.graduationDate}
+              className="graduationDate"
+              onChange={(e) => handleChange(e, item.id)}
+            />
+          </div>
+          <div className="content">
+            <ul>
+              {item.content.map((content) => {
+                return (
+                  <EducationContent
+                    key={content.id}
+                    content={content.value}
+                    handleContentChange={(e) => handleContentChange(e, content.id, item.id)}
+                  />
+                );
+              })}
+            </ul>
+          </div>
+          <ShowAddBtn education={item} educationList={defaultEducation} />
+        </div>
       ))}
     </div>
   );
