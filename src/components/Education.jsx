@@ -13,7 +13,7 @@ function ShowAddBtn({ education, educationList }) {
   const lastIndex = education.id + 1;
 
   if (lastIndex === educationList.length) {
-    return <button className="addMore">Add more</button>;
+    return <button className="addMore">Add education</button>;
   }
 }
 
