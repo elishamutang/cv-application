@@ -10,7 +10,7 @@
 }
 
 .title,
-.company-position,
+.organisation-position,
 .location-duration {
   font-weight: bold;
 }
@@ -19,7 +19,7 @@
   grid-area: title;
 }
 
-.company-position {
+.organisation-position {
   grid-area: orgPos;
 }
 
@@ -37,7 +37,7 @@
   text-align: left;
 }
 
-.company-position > div {
+.organisation-position > div {
   text-align: left;
 }
 
