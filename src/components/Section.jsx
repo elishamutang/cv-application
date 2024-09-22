@@ -29,7 +29,7 @@ function SectionHeader({ item, handleHeaderChange }) {
 }
 
 function AddMoreBtn() {
-  return <button className="addMore">Add more sections</button>;
+  return <button className="addMore">Add experience</button>;
 }
 
 function Section() {
@@ -138,7 +138,7 @@ function Section() {
   // console.log(defaultExperience);
 
   return (
-    <div id="section-container">
+    <div className="section-container" id="experience">
       <div className="title">
         <input type="text" value={sectionName} onChange={handleSectionNameChange} />
       </div>
