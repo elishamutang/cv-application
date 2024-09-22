@@ -28,12 +28,18 @@ function SectionHeader({ item, handleHeaderChange }) {
   );
 }
 
-function AddMoreBtn() {
-  return <button className="addMore">Add experience</button>;
+function AddMoreBtn({ sectionName }) {
+  return <button className="addMore">Add {sectionName.toLowerCase()}</button>;
 }
 
 function Section() {
-  const [sectionName, setSectionName] = useState("Experience");
+  // Initial values
+  const [sectionNames, setSectionName] = useState([
+    { id: 0, value: "Experience" },
+    { id: 1, value: "Projects" },
+  ]);
+
+  // Change array to contain only 1 object.
   const [defaultExperience, setExperience] = useState([
     {
       id: 0,
@@ -93,12 +99,16 @@ function Section() {
     },
   ]);
 
-  function handleSectionNameChange(e) {
-    setSectionName(e.target.value);
-
-    if (e.target.value === "") {
-      setSectionName("Experience");
-    }
+  function handleSectionNameChange(e, itemId) {
+    setSectionName(
+      sectionNames.map((name) => {
+        if (name.id === itemId) {
+          return { ...name, value: e.target.value === "" ? name.value : e.target.value };
+        } else {
+          return name;
+        }
+      })
+    );
   }
 
   function handleHeaderChange(e, itemId) {
@@ -138,32 +148,38 @@ function Section() {
   // console.log(defaultExperience);
 
   return (
-    <div className="section-container" id="experience">
-      <div className="title">
-        <input type="text" value={sectionName} onChange={handleSectionNameChange} />
-      </div>
-      {defaultExperience.map((item) => {
+    <>
+      {sectionNames.map((section) => {
         return (
-          <div className="section" key={item.id}>
-            <SectionHeader item={item} handleHeaderChange={handleHeaderChange} />
-            <div className="content">
-              <ul>
-                {item.content.map((content) => {
-                  return (
-                    <SectionContent
-                      key={content.id}
-                      content={content}
-                      handleContentChange={(e) => handleContentChange(e, content.id, item.id)}
-                    />
-                  );
-                })}
-              </ul>
+          <div className="section-container" id="experience" key={section.id}>
+            <div className="title">
+              <input type="text" value={section.value} onChange={(e) => handleSectionNameChange(e, section.id)} />
             </div>
+            {defaultExperience.map((item) => {
+              return (
+                <div className="section" key={item.id}>
+                  <SectionHeader item={item} handleHeaderChange={handleHeaderChange} />
+                  <div className="content">
+                    <ul>
+                      {item.content.map((content) => {
+                        return (
+                          <SectionContent
+                            key={content.id}
+                            content={content}
+                            handleContentChange={(e) => handleContentChange(e, content.id, item.id)}
+                          />
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </div>
+              );
+            })}
+            <AddMoreBtn sectionName={section.value} />
           </div>
         );
       })}
-      <AddMoreBtn />
-    </div>
+    </>
   );
 }
 
