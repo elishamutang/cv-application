@@ -34,76 +34,110 @@ function AddMoreBtn({ sectionName }) {
 
 function Section() {
   // Initial values
-  const [sectionNames, setSectionName] = useState([
-    { id: 0, value: "Experience" },
-    { id: 1, value: "Projects" },
-  ]);
-
-  // Change array to contain only 1 object.
-  const [defaultExperience, setExperience] = useState([
+  const [section, setSection] = useState([
     {
       id: 0,
-      organisation: "Organisation",
-      position: "Position Title",
-      location: "City, State",
-      startDate: "Mmm YYYY",
-      endDate: "Mmm YYYY",
+      title: "Experience",
       content: [
         {
           id: 0,
-          value:
-            "Beginning with most recent position, describe your experience, skills, and resulting outcomes in bullet form.",
+          organisation: "Organisation",
+          position: "Position Title",
+          location: "City, State",
+          startDate: "Mmm YYYY",
+          endDate: "Mmm YYYY",
+          bulletPoints: [
+            {
+              id: 0,
+              value:
+                "Beginning with most recent position, describe your experience, skills, and resulting outcomes in bullet form.",
+            },
+            {
+              id: 1,
+              value:
+                "Begin each line with an action verb and include details that will help the reader understand your accomplishments, skills, knowledge, abilities, or achievements.",
+            },
+            {
+              id: 2,
+              value: "Quantify where possible.",
+            },
+            {
+              id: 3,
+              value: "Do not use personal pronouns; each line should be a phrase rather than a full sentence.",
+            },
+          ],
         },
         {
           id: 1,
-          value:
-            "Begin each line with an action verb and include details that will help the reader understand your accomplishments, skills, knowledge, abilities, or achievements.",
-        },
-        {
-          id: 2,
-          value: "Quantify where possible.",
-        },
-        {
-          id: 3,
-          value: "Do not use personal pronouns; each line should be a phrase rather than a full sentence.",
+          organisation: "Organisation",
+          position: "Position Title",
+          location: "City, State",
+          startDate: "Mmm YYYY",
+          endDate: "Mmm YYYY",
+          bulletPoints: [
+            {
+              id: 0,
+              value:
+                "With next-most recent position, describe your experience, skills, and resulting outcomes in bullet form.",
+            },
+            {
+              id: 1,
+              value:
+                "Begin each line with an action verb and include details that will help the reader understand your accomplishments, skills, knowledge, abilities, or achievements.",
+            },
+            {
+              id: 2,
+              value: "Quantify where possible.",
+            },
+            {
+              id: 3,
+              value: "Do not use personal pronouns; each line should be a phrase rather than a full sentence.",
+            },
+          ],
         },
       ],
     },
     {
       id: 1,
-      organisation: "Organisation",
-      position: "Position Title",
-      location: "City, State",
-      startDate: "Mmm YYYY",
-      endDate: "Mmm YYYY",
+      title: "Projects",
       content: [
         {
           id: 0,
-          value:
-            "With next-most recent position, describe your experience, skills, and resulting outcomes in bullet form.",
-        },
-        {
-          id: 1,
-          value:
-            "Begin each line with an action verb and include details that will help the reader understand your accomplishments, skills, knowledge, abilities, or achievements.",
-        },
-        {
-          id: 2,
-          value: "Quantify where possible.",
-        },
-        {
-          id: 3,
-          value: "Do not use personal pronouns; each line should be a phrase rather than a full sentence.",
+          organisation: "Organisation",
+          position: "Position Title",
+          location: "City, State",
+          startDate: "Mmm YYYY",
+          endDate: "Mmm YYYY",
+          bulletPoints: [
+            {
+              id: 0,
+              value:
+                "With next-most recent position, describe your experience, skills, and resulting outcomes in bullet form.",
+            },
+            {
+              id: 1,
+              value:
+                "Begin each line with an action verb and include details that will help the reader understand your accomplishments, skills, knowledge, abilities, or achievements.",
+            },
+            {
+              id: 2,
+              value: "Quantify where possible.",
+            },
+            {
+              id: 3,
+              value: "Do not use personal pronouns; each line should be a phrase rather than a full sentence.",
+            },
+          ],
         },
       ],
     },
   ]);
 
   function handleSectionNameChange(e, itemId) {
-    setSectionName(
-      sectionNames.map((name) => {
+    setSection(
+      section.map((name) => {
         if (name.id === itemId) {
-          return { ...name, value: e.target.value === "" ? name.value : e.target.value };
+          return { ...name, title: e.target.value === "" ? name.title : e.target.value };
         } else {
           return name;
         }
@@ -111,62 +145,83 @@ function Section() {
     );
   }
 
-  function handleHeaderChange(e, itemId) {
-    setExperience(
-      defaultExperience.map((item) => {
-        if (item.id === itemId) {
-          return { ...item, [e.currentTarget.className]: e.target.value };
-        } else {
-          return item;
-        }
-      })
-    );
-  }
+  function handleHeaderChange(e, sectionId, contentId) {
+    const sectionCopy = [...section];
 
-  function handleContentChange(e, contentId, itemId) {
-    const changedExperience = [...defaultExperience];
-
-    const changedContent = changedExperience.map((item) => {
-      if (item.id === itemId) {
-        const newContent = [...item.content];
+    const changedSection = sectionCopy.map((sec) => {
+      if (sec.id === sectionId) {
+        const newContent = [...sec.content];
 
         newContent.map((content) => {
           if (content.id === contentId) {
-            content.value = e.target.value;
+            content[e.currentTarget.className] = e.target.value;
           }
         });
 
-        return { ...item, content: newContent };
+        return { ...sec, content: newContent };
       } else {
-        return item;
+        return sec;
       }
     });
 
-    setExperience(changedContent);
+    setSection(changedSection);
   }
 
-  // console.log(defaultExperience);
+  function handleContentChange(e, sectionId, contentId, pointId) {
+    const sectionCopy = [...section];
+
+    const changedContent = sectionCopy.map((sec) => {
+      if (sec.id === sectionId) {
+        const newContent = [...sec.content];
+
+        newContent.map((content) => {
+          if (content.id === contentId) {
+            const newBulletPoints = [...content.bulletPoints];
+
+            newBulletPoints.map((point) => {
+              if (point.id === pointId) {
+                point.value = e.target.value;
+              }
+            });
+
+            return { ...content, bulletPoints: newBulletPoints };
+          }
+        });
+
+        return { ...sec, content: newContent };
+      } else {
+        return sec;
+      }
+    });
+
+    setSection(changedContent);
+  }
+
+  // console.log(section);
 
   return (
     <>
-      {sectionNames.map((section) => {
+      {section.map((section) => {
         return (
           <div className="section-container" id="experience" key={section.id}>
             <div className="title">
-              <input type="text" value={section.value} onChange={(e) => handleSectionNameChange(e, section.id)} />
+              <input type="text" value={section.title} onChange={(e) => handleSectionNameChange(e, section.id)} />
             </div>
-            {defaultExperience.map((item) => {
+            {section.content.map((content) => {
               return (
-                <div className="section" key={item.id}>
-                  <SectionHeader item={item} handleHeaderChange={handleHeaderChange} />
+                <div className="section" key={content.id}>
+                  <SectionHeader
+                    item={content}
+                    handleHeaderChange={(e) => handleHeaderChange(e, section.id, content.id)}
+                  />
                   <div className="content">
                     <ul>
-                      {item.content.map((content) => {
+                      {content.bulletPoints.map((point) => {
                         return (
                           <SectionContent
-                            key={content.id}
-                            content={content}
-                            handleContentChange={(e) => handleContentChange(e, content.id, item.id)}
+                            key={point.id}
+                            content={point}
+                            handleContentChange={(e) => handleContentChange(e, section.id, content.id, point.id)}
                           />
                         );
                       })}
@@ -175,7 +230,7 @@ function Section() {
                 </div>
               );
             })}
-            <AddMoreBtn sectionName={section.value} />
+            <AddMoreBtn sectionName={section.title} />
           </div>
         );
       })}
