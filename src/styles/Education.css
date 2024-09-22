@@ -1,7 +1,6 @@
 .education-section {
   display: grid;
   grid-template-areas:
-    "title title title"
     "institution . locationGraduationDate"
     "content content content"
     "addMore addMore addMore";

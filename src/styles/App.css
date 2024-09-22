@@ -55,12 +55,13 @@ input:hover {
 .education-section,
 .section {
   font-size: 0.8rem;
+  margin-top: 0.8rem;
 
   grid-template-columns: 1.5fr 0.1fr 1.5fr;
   gap: 0.5rem;
 }
 
-.section-container,
+.section,
 #education {
   margin-top: 0.8rem;
 }
