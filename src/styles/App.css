@@ -79,7 +79,8 @@ input:hover {
 }
 
 #education,
-.section-container {
+.section-container,
+#skills-interests {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

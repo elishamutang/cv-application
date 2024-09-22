@@ -1,0 +1,37 @@
+#skills-interests {
+  margin-top: 0.8rem;
+}
+
+.skills-interests-content {
+  display: flex;
+  font-size: 0.8rem;
+}
+
+.skills-interests-content ul {
+  text-align: left;
+}
+
+.heading-info {
+  list-style: none;
+  display: flex;
+}
+
+.heading,
+.info {
+  /* border: 1px solid red; */
+  padding: 0.2rem;
+}
+
+.heading {
+  grid-area: heading;
+  font-weight: bold;
+  max-width: 5rem;
+}
+
+.heading::after {
+  content: ":";
+}
+
+.info {
+  grid-area: content;
+}
