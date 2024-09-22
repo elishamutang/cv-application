@@ -1,7 +1,6 @@
 .section {
   display: grid;
   grid-template-areas:
-    "title title title"
     "orgPos . locationDuration"
     "content content content"
     "addMore addMore addMore";
@@ -10,14 +9,18 @@
   font-size: 1rem;
 }
 
+.addMore {
+  grid-area: addMore;
+}
+
 .title,
 .organisation-position,
 .location-duration {
   font-weight: bold;
 }
 
-.title {
-  grid-area: title;
+.title > input {
+  padding-bottom: 0%;
 }
 
 .organisation-position {

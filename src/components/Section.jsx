@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import ContentEditable from "react-contenteditable";
 
 function SectionContent({ content, handleContentChange }) {
@@ -67,6 +67,34 @@ function Section() {
         },
       ],
     },
+    {
+      id: 1,
+      organisation: "Organisation",
+      position: "Position Title",
+      location: "City, State",
+      startDate: "Mmm YYYY",
+      endDate: "Mmm YYYY",
+      content: [
+        {
+          id: 0,
+          value:
+            "With next-most recent position, describe your experience, skills, and resulting outcomes in bullet form.",
+        },
+        {
+          id: 1,
+          value:
+            "Begin each line with an action verb and include details that will help the reader understand your accomplishments, skills, knowledge, abilities, or achievements.",
+        },
+        {
+          id: 2,
+          value: "Quantify where possible.",
+        },
+        {
+          id: 3,
+          value: "Do not use personal pronouns; each line should be a phrase rather than a full sentence.",
+        },
+      ],
+    },
   ]);
 
   function handleSectionNameChange(e) {
@@ -114,13 +142,13 @@ function Section() {
   // console.log(defaultExperience);
 
   return (
-    <div className="section">
+    <div className="section-container">
       <div className="title">
         <input type="text" value={sectionName} onChange={handleSectionNameChange} />
       </div>
       {defaultExperience.map((item) => {
         return (
-          <Fragment key={item.id}>
+          <div className="section" key={item.id}>
             <SectionHeader item={item} handleHeaderChange={handleHeaderChange} />
             <div className="content">
               <ul>
@@ -136,7 +164,7 @@ function Section() {
               </ul>
             </div>
             <AddMoreBtn itemId={item.id} experiences={defaultExperience} />
-          </Fragment>
+          </div>
         );
       })}
     </div>
