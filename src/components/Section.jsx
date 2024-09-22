@@ -28,12 +28,8 @@ function SectionHeader({ item, handleHeaderChange }) {
   );
 }
 
-function AddMoreBtn({ itemId, experiences }) {
-  const lastIdx = itemId + 1;
-
-  if (lastIdx === experiences.length) {
-    return <button className="addMore">Add more sections</button>;
-  }
+function AddMoreBtn() {
+  return <button className="addMore">Add more sections</button>;
 }
 
 function Section() {
@@ -142,7 +138,7 @@ function Section() {
   // console.log(defaultExperience);
 
   return (
-    <div className="section-container">
+    <div id="section-container">
       <div className="title">
         <input type="text" value={sectionName} onChange={handleSectionNameChange} />
       </div>
@@ -163,10 +159,10 @@ function Section() {
                 })}
               </ul>
             </div>
-            <AddMoreBtn itemId={item.id} experiences={defaultExperience} />
           </div>
         );
       })}
+      <AddMoreBtn />
     </div>
   );
 }

@@ -9,12 +9,8 @@ function EducationContent({ content, handleContentChange }) {
   );
 }
 
-function ShowAddBtn({ education, educationList }) {
-  const lastIndex = education.id + 1;
-
-  if (lastIndex === educationList.length) {
-    return <button className="addMore">Add education</button>;
-  }
+function ShowAddBtn() {
+  return <button className="addMore">Add education</button>;
 }
 
 function Education() {
@@ -105,9 +101,9 @@ function Education() {
               })}
             </ul>
           </div>
-          <ShowAddBtn education={item} educationList={defaultEducation} />
         </div>
       ))}
+      <ShowAddBtn />
     </div>
   );
 }
