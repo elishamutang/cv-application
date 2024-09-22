@@ -14,6 +14,8 @@ function ShowAddBtn() {
 }
 
 function Education() {
+  // Change array to contain only 1 object.
+  // Initial values
   const [defaultEducation, setEducation] = useState([
     {
       id: 0,
