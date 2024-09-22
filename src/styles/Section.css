@@ -3,7 +3,8 @@
   grid-template-areas:
     "title title title"
     "orgPos . locationDuration"
-    "content content content";
+    "content content content"
+    "addMore addMore addMore";
 
   border: 1px solid red;
   font-size: 1rem;
@@ -45,4 +46,8 @@
   display: flex;
   justify-content: flex-end;
   gap: 2%;
+}
+
+.addMore {
+  grid-area: addMore;
 }
