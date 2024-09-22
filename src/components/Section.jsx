@@ -28,6 +28,14 @@ function SectionHeader({ item, handleHeaderChange }) {
   );
 }
 
+function AddMoreBtn({ itemId, experiences }) {
+  const lastIdx = itemId + 1;
+
+  if (lastIdx === experiences.length) {
+    return <button className="addMore">Add more sections</button>;
+  }
+}
+
 function Section() {
   const [sectionName, setSectionName] = useState("Experience");
   const [defaultExperience, setExperience] = useState([
@@ -127,6 +135,7 @@ function Section() {
                 })}
               </ul>
             </div>
+            <AddMoreBtn itemId={item.id} experiences={defaultExperience} />
           </Fragment>
         );
       })}
