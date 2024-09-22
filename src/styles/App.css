@@ -41,7 +41,7 @@ input:hover {
 }
 
 #contact {
-  margin-top: 2%;
+  margin-top: 0.2rem;
   display: flex;
 }
 
@@ -69,13 +69,17 @@ input:hover {
   text-align: left;
 }
 
-.title > input,
-.title {
+.title,
+.title > input {
   font-size: 0.8rem;
 }
 
+.title {
+  margin-top: 0.5rem;
+}
+
 #education,
-#section-container {
+.section-container {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
