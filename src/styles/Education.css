@@ -22,8 +22,3 @@
 .location-graduationDate {
   font-weight: bold;
 }
-
-.addMore {
-  grid-area: addMore;
-  margin-top: 8%;
-}
