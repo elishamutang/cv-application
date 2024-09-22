@@ -26,7 +26,7 @@ function Header() {
   }
 
   return (
-    <>
+    <div id="header">
       <div id="name">
         <input type="text" id="fullName" placeholder={fullName} onChange={handleName} />
       </div>
@@ -35,7 +35,7 @@ function Header() {
           return <input key={item.id} id={item.id} placeholder={item.field} onChange={handleContactChange} />;
         })}
       </div>
-    </>
+    </div>
   );
 }
 
