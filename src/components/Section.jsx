@@ -28,8 +28,12 @@ function SectionHeader({ item, handleHeaderChange }) {
   );
 }
 
-function AddMoreBtn({ sectionName }) {
-  return <button className="addMore">Add {sectionName.toLowerCase()}</button>;
+function AddMoreBtn({ sectionName, handleClick }) {
+  return (
+    <button onClick={handleClick} className="addMore">
+      Add {sectionName.toLowerCase()}
+    </button>
+  );
 }
 
 function Section() {
@@ -197,13 +201,34 @@ function Section() {
     setSection(changedContent);
   }
 
+  function handleClick(sectionId) {
+    const sectionCopy = [...section];
+
+    const newSection = sectionCopy.map((sec) => {
+      if (sec.id === sectionId) {
+        const newContent = [...sec.content];
+
+        const newEntry = newContent.length > 1 ? { ...newContent[1] } : { ...newContent[0] };
+        newEntry.id = newContent.length;
+
+        newContent.push(newEntry);
+
+        return { ...sec, content: newContent };
+      } else {
+        return sec;
+      }
+    });
+
+    setSection(newSection);
+  }
+
   // console.log(section);
 
   return (
     <>
       {section.map((section) => {
         return (
-          <div className="section-container" id="experience" key={section.id}>
+          <div className="section-container" id={section.title.toLowerCase()} key={section.id}>
             <div className="title">
               <input type="text" value={section.title} onChange={(e) => handleSectionNameChange(e, section.id)} />
             </div>
@@ -230,7 +255,7 @@ function Section() {
                 </div>
               );
             })}
-            <AddMoreBtn sectionName={section.title} />
+            <AddMoreBtn handleClick={() => handleClick(section.id)} sectionName={section.title} />
           </div>
         );
       })}
