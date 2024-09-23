@@ -3,14 +3,10 @@
   grid-template-areas:
     "orgPos . locationDuration"
     "content content content"
-    "addMore addMore addMore";
+    "remove remove remove";
 
   border: 1px solid red;
   font-size: 1rem;
-}
-
-.addMore {
-  grid-area: addMore;
 }
 
 .title,
