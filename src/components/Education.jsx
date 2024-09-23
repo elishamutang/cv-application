@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ContentEditable from "react-contenteditable";
 import { AddSection, RemoveSection } from "./Buttons";
+import getLargestId from "../../helperFuncs";
 
 function EducationContent({ content, handleContentChange }) {
   return (
@@ -74,12 +75,7 @@ function Education() {
       newEducation = [...education];
 
       const newEntry = { ...newEducation[0] };
-
-      const getIds = newEducation.map((item) => {
-        return item.id;
-      });
-
-      const largestIdVal = Math.max(...getIds);
+      const largestIdVal = getLargestId(newEducation);
 
       newEntry.id = largestIdVal + 1;
 
