@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ContentEditable from "react-contenteditable";
 import { AddSection, RemoveSection } from "./Buttons";
+import getLargestId from "../../helperFuncs";
 
 function SectionContent({ content, handleContentChange }) {
   return (
@@ -31,7 +32,7 @@ function SectionHeader({ item, handleHeaderChange }) {
 
 function Section() {
   // Initial values
-  const [section, setSection] = useState([
+  const initialSection = [
     {
       id: 0,
       title: "Experience",
@@ -128,7 +129,9 @@ function Section() {
         },
       ],
     },
-  ]);
+  ];
+
+  const [section, setSection] = useState(initialSection);
 
   function handleSectionNameChange(e, itemId) {
     setSection(
@@ -195,16 +198,28 @@ function Section() {
   }
 
   function handleClick(sectionId) {
-    const sectionCopy = [...section];
+    let sectionCopy = [...section];
 
     const newSection = sectionCopy.map((sec) => {
       if (sec.id === sectionId) {
-        const newContent = [...sec.content];
+        let newContent = [...sec.content];
 
-        const newEntry = newContent.length > 1 ? { ...newContent[1] } : { ...newContent[0] };
-        newEntry.id = newContent.length;
+        // If current seciton is empty, use initial values.
+        if (newContent.length === 0) {
+          [newContent] = initialSection
+            .filter((initialSec) => {
+              if (initialSec.id === sectionId) return initialSec;
+            })
+            .map((item) => item.content);
 
-        newContent.push(newEntry);
+          newContent = [newContent[0]]; // Adds the first entry of that section in intialSection.content array.
+        } else {
+          // If not emtpy, add to current state
+          const newEntry = newContent.length > 1 ? { ...newContent[1] } : { ...newContent[0] };
+          newEntry.id = getLargestId(newContent) + 1;
+
+          newContent.push(newEntry);
+        }
 
         return { ...sec, content: newContent };
       } else {
@@ -215,7 +230,33 @@ function Section() {
     setSection(newSection);
   }
 
-  // console.log(section);
+  function handleRemove(sectionId, contentId) {
+    const sectionCopy = [...section];
+
+    if (sectionCopy.length === 1) {
+      setSection([]);
+    } else {
+      const updatedSection = sectionCopy.map((item) => {
+        if (item.id === sectionId) {
+          const newContent = [...item.content];
+
+          const updatedContent = newContent.filter((content) => {
+            if (content.id !== contentId) {
+              return content;
+            }
+          });
+
+          return { ...item, content: updatedContent };
+        } else {
+          return item;
+        }
+      });
+
+      setSection(updatedSection);
+    }
+  }
+
+  console.log(section);
 
   return (
     <>
@@ -245,7 +286,7 @@ function Section() {
                       })}
                     </ul>
                   </div>
-                  <RemoveSection />
+                  <RemoveSection handleRemove={() => handleRemove(section.id, content.id)} />
                 </div>
               );
             })}
