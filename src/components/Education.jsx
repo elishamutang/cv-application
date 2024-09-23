@@ -1,19 +1,12 @@
 import { useState } from "react";
 import ContentEditable from "react-contenteditable";
+import { AddSection, RemoveSection } from "./Buttons";
 
 function EducationContent({ content, handleContentChange }) {
   return (
     <li>
       <ContentEditable html={content} onChange={handleContentChange} />
     </li>
-  );
-}
-
-function AddMoreBtn({ handleClick }) {
-  return (
-    <button onClick={handleClick} className="addMore">
-      Add education
-    </button>
   );
 }
 
@@ -110,9 +103,10 @@ function Education() {
               })}
             </ul>
           </div>
+          <RemoveSection />
         </div>
       ))}
-      <AddMoreBtn handleClick={handleClick} />
+      <AddSection sectionName="education" handleClick={handleClick} />
     </div>
   );
 }

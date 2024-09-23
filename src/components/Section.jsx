@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ContentEditable from "react-contenteditable";
+import { AddSection, RemoveSection } from "./Buttons";
 
 function SectionContent({ content, handleContentChange }) {
   return (
@@ -25,14 +26,6 @@ function SectionHeader({ item, handleHeaderChange }) {
         </div>
       </div>
     </>
-  );
-}
-
-function AddMoreBtn({ sectionName, handleClick }) {
-  return (
-    <button onClick={handleClick} className="addMore">
-      Add {sectionName.toLowerCase()}
-    </button>
   );
 }
 
@@ -252,10 +245,11 @@ function Section() {
                       })}
                     </ul>
                   </div>
+                  <RemoveSection />
                 </div>
               );
             })}
-            <AddMoreBtn handleClick={() => handleClick(section.id)} sectionName={section.title} />
+            <AddSection handleClick={() => handleClick(section.id)} sectionName={section.title.toLowerCase()} />
           </div>
         );
       })}
