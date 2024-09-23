@@ -9,12 +9,15 @@ function EducationContent({ content, handleContentChange }) {
   );
 }
 
-function ShowAddBtn() {
-  return <button className="addMore">Add education</button>;
+function AddMoreBtn({ handleClick }) {
+  return (
+    <button onClick={handleClick} className="addMore">
+      Add education
+    </button>
+  );
 }
 
 function Education() {
-  // Change array to contain only 1 object.
   // Initial values
   const [defaultEducation, setEducation] = useState([
     {
@@ -28,18 +31,9 @@ function Education() {
         { id: 2, value: "Relevant Coursework: [Note: Optional. Awards and honors can also be listed here]" },
       ],
     },
-    {
-      id: 1,
-      institution: "Goofy Goobers",
-      location: "Austin, TX",
-      graduationDate: "Mmm YYYY",
-      content: [
-        { id: 0, value: "Testing" },
-        { id: 1, value: "Testing 123" },
-      ],
-    },
   ]);
 
+  // Handle header of each education entry.
   function handleChange(e, itemId) {
     setEducation(
       defaultEducation.map((item) => {
@@ -52,6 +46,7 @@ function Education() {
     );
   }
 
+  // Handle content change within education section.
   function handleContentChange(e, contentId, itemId) {
     const newEducation = [...defaultEducation];
 
@@ -72,6 +67,18 @@ function Education() {
     });
 
     setEducation(newContent);
+  }
+
+  // Add more to education section.
+  function handleClick() {
+    const newEducation = [...defaultEducation];
+
+    const newEntry = { ...newEducation[0] };
+    newEntry.id = newEducation.length;
+
+    newEducation.push(newEntry);
+
+    setEducation(newEducation);
   }
 
   // console.log(defaultEducation);
@@ -105,7 +112,7 @@ function Education() {
           </div>
         </div>
       ))}
-      <ShowAddBtn />
+      <AddMoreBtn handleClick={handleClick} />
     </div>
   );
 }
