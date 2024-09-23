@@ -1,5 +1,9 @@
-function RemoveSection() {
-  return <button className="removeBtn">Remove</button>;
+function RemoveSection({ handleRemove }) {
+  return (
+    <button onClick={handleRemove} className="removeBtn">
+      Remove
+    </button>
+  );
 }
 
 function AddSection({ sectionName, handleClick }) {
