@@ -12,7 +12,7 @@ function EducationContent({ content, handleContentChange }) {
 
 function Education() {
   // Initial values
-  const [defaultEducation, setEducation] = useState([
+  const initialEducation = [
     {
       id: 0,
       institution: "Example University",
@@ -24,12 +24,14 @@ function Education() {
         { id: 2, value: "Relevant Coursework: [Note: Optional. Awards and honors can also be listed here]" },
       ],
     },
-  ]);
+  ];
+
+  const [education, setEducation] = useState(initialEducation);
 
   // Handle header of each education entry.
   function handleChange(e, itemId) {
     setEducation(
-      defaultEducation.map((item) => {
+      education.map((item) => {
         if (item.id === itemId) {
           return { ...item, [e.currentTarget.className]: e.target.value };
         } else {
@@ -41,7 +43,7 @@ function Education() {
 
   // Handle content change within education section.
   function handleContentChange(e, contentId, itemId) {
-    const newEducation = [...defaultEducation];
+    const newEducation = [...education];
 
     const newContent = newEducation.map((item) => {
       if (item.id === itemId) {
@@ -64,22 +66,54 @@ function Education() {
 
   // Add more to education section.
   function handleClick() {
-    const newEducation = [...defaultEducation];
+    let newEducation;
 
-    const newEntry = { ...newEducation[0] };
-    newEntry.id = newEducation.length;
+    if (education.length === 0) {
+      newEducation = [...initialEducation];
+    } else {
+      newEducation = [...education];
 
-    newEducation.push(newEntry);
+      const newEntry = { ...newEducation[0] };
+
+      const getIds = newEducation.map((item) => {
+        return item.id;
+      });
+
+      const largestIdVal = Math.max(...getIds);
+
+      newEntry.id = largestIdVal + 1;
+
+      newEducation.push(newEntry);
+    }
 
     setEducation(newEducation);
   }
 
-  // console.log(defaultEducation);
+  // Remove education section.
+  function handleRemove(itemId) {
+    const newEducation = [...education];
+
+    if (newEducation.length === 1) {
+      setEducation([]);
+    } else {
+      const updatedEducation = newEducation.filter((item) => {
+        if (item.id !== itemId) {
+          return item;
+        }
+      });
+
+      setEducation(updatedEducation);
+    }
+
+    // console.log(newEducation);
+  }
+
+  // console.log(education);
 
   return (
     <div id="education">
       <div className="title">Education</div>
-      {defaultEducation.map((item) => (
+      {education.map((item) => (
         <div key={item.id} className="education-section">
           <ContentEditable html={item.institution} className="institution" onChange={(e) => handleChange(e, item.id)} />
           <div className="location-graduationDate">
@@ -103,7 +137,7 @@ function Education() {
               })}
             </ul>
           </div>
-          <RemoveSection />
+          <RemoveSection handleRemove={() => handleRemove(item.id)} />
         </div>
       ))}
       <AddSection sectionName="education" handleClick={handleClick} />
