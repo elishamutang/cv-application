@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ContentEditable from "react-contenteditable";
 import { AddSection, RemoveSection } from "./Buttons";
-import getLargestId from "../../helperFuncs";
+import getLargestId from "../helperFuncs";
 
 function SectionContent({ content, handleContentChange }) {
   return (
