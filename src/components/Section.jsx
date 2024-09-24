@@ -230,7 +230,7 @@ function Section() {
     setSection(newSection);
   }
 
-  function handleRemove(sectionId, contentId) {
+  function handleRemoveSectionContent(sectionId, contentId) {
     const sectionCopy = [...section];
 
     if (sectionCopy.length === 1) {
@@ -286,7 +286,9 @@ function Section() {
                       })}
                     </ul>
                   </div>
-                  <RemoveSection handleRemove={() => handleRemove(section.id, content.id)} />
+                  <RemoveSection
+                    handleRemoveSectionContent={() => handleRemoveSectionContent(section.id, content.id)}
+                  />
                 </div>
               );
             })}
