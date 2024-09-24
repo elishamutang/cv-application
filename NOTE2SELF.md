@@ -5,6 +5,7 @@
    1. Add/remove bullet points.
    2. Add/remove additional sections (ensure Education, Experience and Skills remain at a minimum).
    3. Move sections up/down.
-   4. Print to PDF.
-   5. Share to others.
-   6. Email to yourself.
+   4. Add Editing mode.
+   5. Print to PDF.
+   6. Share to others.
+   7. Email to yourself.
