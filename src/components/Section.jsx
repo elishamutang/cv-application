@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ContentEditable from "react-contenteditable";
-import { AddSection, RemoveSection } from "./Buttons";
+import { AddSection, RemoveSection, IcBaselineRemoveCircle, IcRoundAddCircle } from "./Buttons";
 import getLargestId from "../helperFuncs";
 
 function SectionContent({ content, handleContentChange }) {
@@ -260,19 +260,17 @@ function Section() {
 
   return (
     <>
-      {section.map((section) => {
+      {section.map((sec) => {
         return (
-          <div className="section-container" id={section.title.toLowerCase()} key={section.id}>
+          <div className="section-container" id={sec.title.toLowerCase()} key={sec.id}>
             <div className="title">
-              <input type="text" value={section.title} onChange={(e) => handleSectionNameChange(e, section.id)} />
+              <input type="text" value={sec.title} onChange={(e) => handleSectionNameChange(e, sec.id)} />
+              {sec.id !== 0 ? <IcBaselineRemoveCircle className="removeSection" /> : ""}
             </div>
-            {section.content.map((content) => {
+            {sec.content.map((content) => {
               return (
                 <div className="section" key={content.id}>
-                  <SectionHeader
-                    item={content}
-                    handleHeaderChange={(e) => handleHeaderChange(e, section.id, content.id)}
-                  />
+                  <SectionHeader item={content} handleHeaderChange={(e) => handleHeaderChange(e, sec.id, content.id)} />
                   <div className="content">
                     <ul>
                       {content.bulletPoints.map((point) => {
@@ -280,19 +278,24 @@ function Section() {
                           <SectionContent
                             key={point.id}
                             content={point}
-                            handleContentChange={(e) => handleContentChange(e, section.id, content.id, point.id)}
+                            handleContentChange={(e) => handleContentChange(e, sec.id, content.id, point.id)}
                           />
                         );
                       })}
                     </ul>
                   </div>
-                  <RemoveSection
-                    handleRemoveSectionContent={() => handleRemoveSectionContent(section.id, content.id)}
-                  />
+                  <RemoveSection handleRemoveSectionContent={() => handleRemoveSectionContent(sec.id, content.id)} />
                 </div>
               );
             })}
-            <AddSection handleClick={() => handleClick(section.id)} sectionName={section.title.toLowerCase()} />
+            <AddSection handleClick={() => handleClick(sec.id)} sectionName={sec.title.toLowerCase()} />
+            {sec.id !== 0 ? (
+              <button className="addNewSection">
+                <IcRoundAddCircle />
+              </button>
+            ) : (
+              ""
+            )}
           </div>
         );
       })}
