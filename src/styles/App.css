@@ -76,6 +76,18 @@ input:hover {
 
 .title {
   margin-top: 0.8rem;
+  display: grid;
+  grid-template-areas: ". title removeBtn";
+  grid-template-columns: 0.1fr 1fr 0.1fr;
+  place-items: center;
+}
+
+.title > input {
+  grid-area: title;
+}
+
+#education > .title {
+  display: block;
 }
 
 #education,

@@ -51,3 +51,27 @@
 .addMore {
   margin-bottom: 1rem;
 }
+
+.addNewSection {
+  align-self: center;
+  border: none;
+  background-color: white;
+  padding: 0;
+
+  display: flex;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.addNewSection > svg {
+  font-size: 3rem;
+  text-align: center;
+  color: grey;
+}
+
+.removeSection {
+  font-size: 1.2rem;
+  color: red;
+  justify-self: end;
+  grid-area: removeBtn;
+}
