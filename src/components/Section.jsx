@@ -110,7 +110,7 @@ function Section() {
             {
               id: 0,
               value:
-                "With next-most recent position, describe your experience, skills, and resulting outcomes in bullet form.",
+                "Beginning with most recent position, describe your experience, skills, and resulting outcomes in bullet form.",
             },
             {
               id: 1,
