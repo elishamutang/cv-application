@@ -46,7 +46,9 @@ function SkillsAndInterests() {
 
   return (
     <div id="skills-interests">
-      <ContentEditable html={content.title} className="title" onChange={handleTitleChange} />
+      <div className="title">
+        <input type="text" value={content.title} onChange={handleTitleChange} />
+      </div>
       <div className="skills-interests-content">
         <ul>
           {content.info.map((item) => {
