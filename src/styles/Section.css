@@ -17,6 +17,7 @@
 
 .title > input {
   padding: 1% 0;
+  width: auto;
 }
 
 .organisation-position {
