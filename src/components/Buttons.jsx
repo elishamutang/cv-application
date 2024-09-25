@@ -6,9 +6,9 @@ function RemoveSection({ handleRemoveSectionContent }) {
   );
 }
 
-function AddSection({ sectionName, handleClick }) {
+function AddSection({ sectionName, handleAddMoreSectionContent }) {
   return (
-    <button onClick={handleClick} className="addMore">
+    <button onClick={handleAddMoreSectionContent} className="addMore">
       Add {sectionName}
     </button>
   );
