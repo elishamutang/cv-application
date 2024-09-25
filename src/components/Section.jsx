@@ -197,7 +197,7 @@ function Section() {
     setSection(changedContent);
   }
 
-  function handleClick(sectionId) {
+  function handleAddMoreSectionContent(sectionId) {
     let sectionCopy = [...section];
 
     const newSection = sectionCopy.map((sec) => {
@@ -256,6 +256,28 @@ function Section() {
     }
   }
 
+  function handleRemoveSection(sectionId) {
+    const sectionCopy = [...section];
+
+    const newSection = sectionCopy.filter((sec) => {
+      if (sec.id !== sectionId) return sec;
+    });
+
+    setSection(newSection);
+  }
+
+  function handleAddNewSection() {
+    const sectionCopy = [...section];
+
+    const latestSection = { ...initialSection[1] };
+    const latestId = getLargestId(sectionCopy);
+
+    latestSection.id = latestId + 1;
+
+    sectionCopy.push(latestSection);
+    setSection(sectionCopy);
+  }
+
   console.log(section);
 
   return (
@@ -265,7 +287,14 @@ function Section() {
           <div className="section-container" id={sec.title.toLowerCase()} key={sec.id}>
             <div className="title">
               <input type="text" value={sec.title} onChange={(e) => handleSectionNameChange(e, sec.id)} />
-              {sec.id !== 0 ? <IcBaselineRemoveCircle className="removeSection" /> : ""}
+              {/* Append the removeSection button to ADDITIONAL sections only. First section can never be deleted. */}
+              {sec.id !== 0 ? (
+                <button onClick={() => handleRemoveSection(sec.id)} className="removeSection">
+                  <IcBaselineRemoveCircle />
+                </button>
+              ) : (
+                ""
+              )}
             </div>
             {sec.content.map((content) => {
               return (
@@ -288,9 +317,13 @@ function Section() {
                 </div>
               );
             })}
-            <AddSection handleClick={() => handleClick(sec.id)} sectionName={sec.title.toLowerCase()} />
-            {sec.id !== 0 ? (
-              <button className="addNewSection">
+            <AddSection
+              handleAddMoreSectionContent={() => handleAddMoreSectionContent(sec.id)}
+              sectionName={sec.title.toLowerCase()}
+            />
+            {/* Adds the 'addNewSection' button to the last element in the section array */}
+            {sec.id === getLargestId(section) ? (
+              <button onClick={handleAddNewSection} className="addNewSection">
                 <IcRoundAddCircle />
               </button>
             ) : (
