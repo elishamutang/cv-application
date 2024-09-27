@@ -75,7 +75,6 @@ input:hover {
 }
 
 .title {
-  margin-top: 0.8rem;
   display: grid;
   grid-template-areas: ". title removeBtn";
   grid-template-columns: 0.1fr 1fr 0.1fr;
@@ -88,6 +87,7 @@ input:hover {
 
 #education > .title {
   display: block;
+  margin-top: 0.8rem;
 }
 
 #education,
@@ -95,5 +95,6 @@ input:hover {
 #skills-interests {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
