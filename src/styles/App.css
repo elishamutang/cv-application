@@ -98,3 +98,18 @@ input:hover {
   gap: 1rem;
   margin-bottom: 2rem;
 }
+
+.addNewBulletPoint {
+  margin-top: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  font-size: 1.5rem;
+  padding: 0%;
+  border: none;
+  color: grey;
+}
+
+.addNewBulletPoint:disabled {
+  opacity: 0.3;
+}
