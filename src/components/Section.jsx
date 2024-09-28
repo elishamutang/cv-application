@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { Fragment, useState, forwardRef } from "react";
 import ContentEditable from "react-contenteditable";
-import { AddSection, RemoveSection, IcBaselineRemoveCircle, IcRoundAddCircle } from "./Buttons";
+import { AddSection, RemoveSection, AddMorePoints, IcBaselineRemoveCircle, IcRoundAddCircle } from "./Buttons";
 import getLargestId from "../helperFuncs";
 
-function SectionContent({ content, handleContentChange }) {
+const SectionContent = forwardRef(({ content, handleContentChange }, ref) => {
   return (
     <li>
-      <ContentEditable html={content.value} onChange={handleContentChange} />
+      <ContentEditable html={content.value} onChange={handleContentChange} ref={ref} />
     </li>
   );
-}
+});
+
+SectionContent.displayName = "SectionContent";
 
 function SectionHeader({ item, handleHeaderChange }) {
   return (
@@ -132,6 +134,7 @@ function Section() {
   ];
 
   const [section, setSection] = useState(initialSection);
+  const [buttonState, setButtonState] = useState(false);
 
   function handleSectionNameChange(e, itemId) {
     setSection(
@@ -278,7 +281,29 @@ function Section() {
     setSection(sectionCopy);
   }
 
-  console.log(section);
+  function addMoreBulletPoints(bulletPointsArr, contentId, sectionId) {
+    const largestId = getLargestId(bulletPointsArr);
+
+    const sectionCopy = [...section];
+    const bulletPointsArrCopy = [...bulletPointsArr];
+
+    const newBulletPoint = { id: largestId + 1, value: "" };
+    bulletPointsArrCopy.push(newBulletPoint);
+
+    sectionCopy.forEach((sec) => {
+      if (sec.id === sectionId) {
+        sec.content.forEach((content) => {
+          if (content.id === contentId) {
+            content.bulletPoints = bulletPointsArrCopy;
+          }
+        });
+      }
+    });
+
+    setSection(sectionCopy);
+  }
+
+  console.log(buttonState);
 
   return (
     <>
@@ -296,19 +321,32 @@ function Section() {
                 ""
               )}
             </div>
+            {/* Content under a specific section (e.g Experience will contain 2 experiences) */}
             {sec.content.map((content) => {
               return (
                 <div className="section" key={content.id}>
                   <SectionHeader item={content} handleHeaderChange={(e) => handleHeaderChange(e, sec.id, content.id)} />
                   <div className="content">
                     <ul>
+                      {/* Bullet-points */}
                       {content.bulletPoints.map((point) => {
                         return (
-                          <SectionContent
-                            key={point.id}
-                            content={point}
-                            handleContentChange={(e) => handleContentChange(e, sec.id, content.id, point.id)}
-                          />
+                          <Fragment key={point.id}>
+                            <SectionContent
+                              content={point}
+                              // Update this ref attribute and make an external function for it.
+                              // ref={point.value === "" ? (element) => element.el.current.focus() : null}
+                              bulletPointsArr={content.bulletPoints}
+                              handleContentChange={(e) => handleContentChange(e, sec.id, content.id, point.id)}
+                            />
+                            {point.id === getLargestId(content.bulletPoints) ? (
+                              <AddMorePoints
+                                onClick={() => addMoreBulletPoints(content.bulletPoints, content.id, sec.id)}
+                              />
+                            ) : (
+                              ""
+                            )}
+                          </Fragment>
                         );
                       })}
                     </ul>
