@@ -1,3 +1,5 @@
+import { forwardRef } from "react";
+
 function RemoveSection({ handleRemoveSectionContent }) {
   return (
     <button onClick={handleRemoveSectionContent} className="removeBtn">
@@ -13,6 +15,16 @@ function AddSection({ sectionName, handleAddMoreSectionContent }) {
     </button>
   );
 }
+
+const AddMorePoints = forwardRef(({ onClick }, ref) => {
+  return (
+    <button className="addNewBulletPoint" onClick={onClick} ref={ref}>
+      <IcRoundAddCircle></IcRoundAddCircle>
+    </button>
+  );
+});
+
+AddMorePoints.displayName = "AddMorePoints";
 
 // Consider moving the two SVGs below to the Section component as they will be only used for that component.
 function IcBaselineRemoveCircle(props) {
@@ -37,4 +49,4 @@ function IcRoundAddCircle(props) {
   );
 }
 
-export { RemoveSection, AddSection, IcBaselineRemoveCircle, IcRoundAddCircle };
+export { RemoveSection, AddSection, AddMorePoints, IcBaselineRemoveCircle, IcRoundAddCircle };
