@@ -3,10 +3,10 @@ import ContentEditable from "react-contenteditable";
 import { AddSection, RemoveSection, AddMorePoints, IcBaselineRemoveCircle, IcRoundAddCircle } from "./Buttons";
 import getLargestId from "../helperFuncs";
 
-const SectionContent = forwardRef(({ content, handleContentChange }, ref) => {
+const SectionContent = forwardRef(({ content, handleContentChange, handleBlur }, ref) => {
   return (
     <li>
-      <ContentEditable html={content.value} onChange={handleContentChange} ref={ref} />
+      <ContentEditable html={content.value} onChange={handleContentChange} onBlur={handleBlur} ref={ref} />
     </li>
   );
 });
@@ -208,6 +208,36 @@ function Section() {
     setSection(changedContent);
   }
 
+  // Remove empty bulletpoint.
+  function handleBlur(sectionId, contentId, pointId) {
+    // Here we update the state that's in queue from the first call in handleContentChange.
+    setSection((prevSection) => {
+      const updatedSection = prevSection.map((sec) => {
+        if (sec.id === sectionId) {
+          const updatedContent = sec.content.map((content) => {
+            if (content.id === contentId) {
+              const updatedBulletPoints = content.bulletPoints.filter((point) => {
+                if (point.id !== pointId) {
+                  return point;
+                }
+              });
+
+              return { ...content, bulletPoints: updatedBulletPoints, buttonDisable: false };
+            } else {
+              return content;
+            }
+          });
+
+          return { ...sec, content: updatedContent };
+        } else {
+          return sec;
+        }
+      });
+
+      return updatedSection;
+    });
+  }
+
   function handleAddMoreSectionContent(sectionId) {
     let sectionCopy = [...section];
 
@@ -317,19 +347,14 @@ function Section() {
     setSection(updatedSectionObj);
   }
 
-  function disableAddMoreBulletPointBtns(element) {
+  function focusOnElement(element) {
     // Focus on newly added bullet point.
-    element.el.current.focus();
-
-    const sectionCopy = [...section];
-
-    // Filter for other sections to disable their buttons.
-    const otherBtns = sectionCopy.map((sec) => {
-      return sec.content;
-    });
-
-    console.log(otherBtns);
+    if (element) {
+      element.el.current.focus();
+    }
   }
+
+  console.log(section);
 
   return (
     <>
@@ -360,9 +385,10 @@ function Section() {
                           <Fragment key={point.id}>
                             <SectionContent
                               content={point}
-                              // ref={point.value === "" ? (element) => disableAddMoreBulletPointBtns(element) : null}
+                              ref={(element) => point.value === "" && focusOnElement(element)}
                               bulletPointsArr={content.bulletPoints}
                               handleContentChange={(e) => handleContentChange(e, sec.id, content.id, point.id)}
+                              handleBlur={(e) => handleBlur(e, sec.id, content.id, point.id)}
                             />
                             {point.id === getLargestId(content.bulletPoints) ? (
                               <AddMorePoints
