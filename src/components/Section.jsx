@@ -66,6 +66,7 @@ function Section() {
               value: "Do not use personal pronouns; each line should be a phrase rather than a full sentence.",
             },
           ],
+          buttonDisable: false,
         },
         {
           id: 1,
@@ -94,6 +95,7 @@ function Section() {
               value: "Do not use personal pronouns; each line should be a phrase rather than a full sentence.",
             },
           ],
+          buttonDisable: false,
         },
       ],
     },
@@ -128,13 +130,13 @@ function Section() {
               value: "Do not use personal pronouns; each line should be a phrase rather than a full sentence.",
             },
           ],
+          buttonDisable: false,
         },
       ],
     },
   ];
 
   const [section, setSection] = useState(initialSection);
-  const [buttonState, setButtonState] = useState(false);
 
   function handleSectionNameChange(e, itemId) {
     setSection(
@@ -173,25 +175,31 @@ function Section() {
   function handleContentChange(e, sectionId, contentId, pointId) {
     const sectionCopy = [...section];
 
+    // Alternatively, create a DEEP copy of the object and mutate that copy.
     const changedContent = sectionCopy.map((sec) => {
       if (sec.id === sectionId) {
         const newContent = [...sec.content];
 
-        newContent.map((content) => {
+        const updatedContent = newContent.map((content) => {
           if (content.id === contentId) {
-            const newBulletPoints = [...content.bulletPoints];
+            const bulletPointsArrCopy = [...content.bulletPoints];
 
-            newBulletPoints.map((point) => {
+            const newBulletPoints = bulletPointsArrCopy.map((point) => {
               if (point.id === pointId) {
-                point.value = e.target.value;
+                return { ...point, value: e.target.value };
+              } else {
+                return point;
               }
             });
 
-            return { ...content, bulletPoints: newBulletPoints };
+            // Enable button after adding some text for new bullet point.
+            return { ...content, bulletPoints: newBulletPoints, buttonDisable: false };
+          } else {
+            return content;
           }
         });
 
-        return { ...sec, content: newContent };
+        return { ...sec, content: updatedContent };
       } else {
         return sec;
       }
@@ -285,25 +293,43 @@ function Section() {
     const largestId = getLargestId(bulletPointsArr);
 
     const sectionCopy = [...section];
-    const bulletPointsArrCopy = [...bulletPointsArr];
 
     const newBulletPoint = { id: largestId + 1, value: "" };
-    bulletPointsArrCopy.push(newBulletPoint);
+    const bulletPointsArrCopy = [...bulletPointsArr, newBulletPoint];
 
-    sectionCopy.forEach((sec) => {
+    const updatedSectionObj = sectionCopy.map((sec) => {
       if (sec.id === sectionId) {
-        sec.content.forEach((content) => {
+        const updatedContent = sec.content.map((content) => {
           if (content.id === contentId) {
-            content.bulletPoints = bulletPointsArrCopy;
+            // Add new bullet point and disable corresponding button.
+            return { ...content, bulletPoints: bulletPointsArrCopy, buttonDisable: true };
+          } else {
+            return content;
           }
         });
+
+        return { ...sec, content: updatedContent };
+      } else {
+        return sec;
       }
     });
 
-    setSection(sectionCopy);
+    setSection(updatedSectionObj);
   }
 
-  console.log(buttonState);
+  function disableAddMoreBulletPointBtns(element) {
+    // Focus on newly added bullet point.
+    element.el.current.focus();
+
+    const sectionCopy = [...section];
+
+    // Filter for other sections to disable their buttons.
+    const otherBtns = sectionCopy.map((sec) => {
+      return sec.content;
+    });
+
+    console.log(otherBtns);
+  }
 
   return (
     <>
@@ -334,14 +360,17 @@ function Section() {
                           <Fragment key={point.id}>
                             <SectionContent
                               content={point}
-                              // Update this ref attribute and make an external function for it.
-                              // ref={point.value === "" ? (element) => element.el.current.focus() : null}
+                              // ref={point.value === "" ? (element) => disableAddMoreBulletPointBtns(element) : null}
                               bulletPointsArr={content.bulletPoints}
                               handleContentChange={(e) => handleContentChange(e, sec.id, content.id, point.id)}
                             />
                             {point.id === getLargestId(content.bulletPoints) ? (
                               <AddMorePoints
-                                onClick={() => addMoreBulletPoints(content.bulletPoints, content.id, sec.id)}
+                                onClick={() =>
+                                  // On-click to add additional bullet point and disable button if no text input.
+                                  addMoreBulletPoints(content.bulletPoints, content.id, sec.id)
+                                }
+                                buttonDisable={content.buttonDisable}
                               />
                             ) : (
                               ""
