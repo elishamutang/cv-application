@@ -401,6 +401,10 @@ function Section() {
                           </Fragment>
                         );
                       })}
+                      {/* Fix this */}
+                      {/* {content.bulletPoints.length === 0 && (
+                        <AddMorePoints onClick={() => addMoreBulletPoints(content.bulletPoints, content.id, sec.id)} />
+                      )} */}
                     </ul>
                   </div>
                   <RemoveSection handleRemoveSectionContent={() => handleRemoveSectionContent(sec.id, content.id)} />
