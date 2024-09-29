@@ -2,7 +2,7 @@
 
 1. Complete the app
 2. Thinking of implementing the following features:
-   1. Add/remove bullet points.
+   1. ~~Add/remove bullet points.~~
    2. ~~Add/remove additional sections (ensure Education, Experience and Skills remain at a minimum).~~
    3. Move sections up/down.
    4. Add a hover effect section when user hovers over Remove button.
