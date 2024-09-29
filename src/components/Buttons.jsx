@@ -16,9 +16,9 @@ function AddSection({ sectionName, handleAddMoreSectionContent }) {
   );
 }
 
-const AddMorePoints = forwardRef(({ onClick }, ref) => {
+const AddMorePoints = forwardRef(({ onClick, buttonDisable }, ref) => {
   return (
-    <button className="addNewBulletPoint" onClick={onClick} ref={ref}>
+    <button className="addNewBulletPoint" onClick={onClick} disabled={buttonDisable} ref={ref}>
       <IcRoundAddCircle></IcRoundAddCircle>
     </button>
   );
