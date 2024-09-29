@@ -209,33 +209,35 @@ function Section() {
   }
 
   // Remove empty bulletpoint.
-  function handleBlur(sectionId, contentId, pointId) {
-    // Here we update the state that's in queue from the first call in handleContentChange.
-    setSection((prevSection) => {
-      const updatedSection = prevSection.map((sec) => {
-        if (sec.id === sectionId) {
-          const updatedContent = sec.content.map((content) => {
-            if (content.id === contentId) {
-              const updatedBulletPoints = content.bulletPoints.filter((point) => {
-                if (point.id !== pointId) {
-                  return point;
-                }
-              });
+  function handleBlur(e, sectionId, contentId, pointId) {
+    if (e.target.textContent === "") {
+      // Here we update the state that's in queue from the first call in handleContentChange.
+      setSection((prevSection) => {
+        const updatedSection = prevSection.map((sec) => {
+          if (sec.id === sectionId) {
+            const updatedContent = sec.content.map((content) => {
+              if (content.id === contentId) {
+                const updatedBulletPoints = content.bulletPoints.filter((point) => {
+                  if (point.id !== pointId) {
+                    return point;
+                  }
+                });
 
-              return { ...content, bulletPoints: updatedBulletPoints, buttonDisable: false };
-            } else {
-              return content;
-            }
-          });
+                return { ...content, bulletPoints: updatedBulletPoints, buttonDisable: false };
+              } else {
+                return content;
+              }
+            });
 
-          return { ...sec, content: updatedContent };
-        } else {
-          return sec;
-        }
+            return { ...sec, content: updatedContent };
+          } else {
+            return sec;
+          }
+        });
+
+        return updatedSection;
       });
-
-      return updatedSection;
-    });
+    }
   }
 
   function handleAddMoreSectionContent(sectionId) {
@@ -390,16 +392,11 @@ function Section() {
                               handleContentChange={(e) => handleContentChange(e, sec.id, content.id, point.id)}
                               handleBlur={(e) => handleBlur(e, sec.id, content.id, point.id)}
                             />
-                            {point.id === getLargestId(content.bulletPoints) ? (
+                            {point.id === getLargestId(content.bulletPoints) && (
                               <AddMorePoints
-                                onClick={() =>
-                                  // On-click to add additional bullet point and disable button if no text input.
-                                  addMoreBulletPoints(content.bulletPoints, content.id, sec.id)
-                                }
-                                buttonDisable={content.buttonDisable}
+                                // On-click to add additional bullet point and disable button if no text input.
+                                onClick={() => addMoreBulletPoints(content.bulletPoints, content.id, sec.id)}
                               />
-                            ) : (
-                              ""
                             )}
                           </Fragment>
                         );
