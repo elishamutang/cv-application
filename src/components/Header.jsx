@@ -32,7 +32,7 @@ function Header() {
       </div>
       <div id="contact">
         {contactDetails.map((item) => {
-          return <input key={item.id} id={item.id} placeholder={item.field} onChange={handleContactChange} />;
+          return <input key={item.id} placeholder={item.field} onChange={handleContactChange} />;
         })}
       </div>
     </div>
