@@ -1,6 +1,14 @@
 import { useState, forwardRef } from "react";
 import ContentEditable from "react-contenteditable";
-import { AddSection, RemoveSection, AddMorePoints, IcBaselineRemoveCircle, IcRoundAddCircle } from "./Buttons";
+import {
+  AddSection,
+  RemoveSection,
+  AddMorePoints,
+  IcBaselineRemoveCircle,
+  IcRoundAddCircle,
+  MoveSectionDown,
+  MoveSectionUp,
+} from "./Buttons";
 import getLargestId from "../helperFuncs";
 
 const BulletPoint = forwardRef(({ content, handleContentChange, handleBlur }, ref) => {
@@ -364,8 +372,11 @@ function Section() {
         return (
           <div className="section-container" id={sec.title.toLowerCase()} key={sec.id}>
             <div className="title">
+              <MoveSectionUp />
+              <MoveSectionDown />
               <input type="text" value={sec.title} onChange={(e) => handleSectionNameChange(e, sec.id)} />
               {/* Append the removeSection button to ADDITIONAL sections only. First section can never be deleted. */}
+              {/* Change below button to utilise custom component. */}
               {sec.id !== 0 ? (
                 <button onClick={() => handleRemoveSection(sec.id)} className="removeSection">
                   <IcBaselineRemoveCircle />
