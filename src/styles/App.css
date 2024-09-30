@@ -76,9 +76,10 @@ input:hover {
 
 .title {
   display: grid;
-  grid-template-areas: ". title removeBtn";
-  grid-template-columns: 0.1fr 1fr 0.1fr;
+  grid-template-areas: "moveSectionDown moveSectionUp title removeBtn";
+  grid-template-columns: auto auto 1fr auto;
   place-items: center;
+  border: 1px solid red;
 }
 
 .title > input {
@@ -112,4 +113,16 @@ input:hover {
 
 .addNewBulletPoint:disabled {
   opacity: 0.3;
+}
+
+.moveSectionDown {
+  grid-area: moveSectionDown;
+  justify-self: start;
+  color: grey;
+}
+
+.moveSectionUp {
+  grid-area: moveSectionUp;
+  justify-self: start;
+  color: grey;
 }
