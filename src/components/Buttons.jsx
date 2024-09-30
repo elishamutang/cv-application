@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 
+// Remove experience under a specific section.
 function RemoveSection({ handleRemoveSectionContent }) {
   return (
     <button onClick={handleRemoveSectionContent} className="removeBtn">
@@ -8,6 +9,7 @@ function RemoveSection({ handleRemoveSectionContent }) {
   );
 }
 
+// Button to add additional experience under a specific section.
 function AddSection({ sectionName, handleAddMoreSectionContent }) {
   return (
     <button onClick={handleAddMoreSectionContent} className="addMore">
@@ -25,6 +27,22 @@ const AddMorePoints = forwardRef(({ onClick, buttonDisable }, ref) => {
 });
 
 AddMorePoints.displayName = "AddMorePoints";
+
+function MoveSectionDown() {
+  return (
+    <button className="moveSectionDown">
+      <IconParkSolidArrowCircleDown></IconParkSolidArrowCircleDown>
+    </button>
+  );
+}
+
+function MoveSectionUp() {
+  return (
+    <button className="moveSectionUp">
+      <IconParkSolidArrowCircleUp></IconParkSolidArrowCircleUp>
+    </button>
+  );
+}
 
 // Consider moving the two SVGs below to the Section component as they will be only used for that component.
 function IcBaselineRemoveCircle(props) {
@@ -49,4 +67,52 @@ function IcRoundAddCircle(props) {
   );
 }
 
-export { RemoveSection, AddSection, AddMorePoints, IcBaselineRemoveCircle, IcRoundAddCircle };
+export function IconParkSolidArrowCircleDown(props) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48" {...props}>
+      <defs>
+        <mask id="ipSArrowCircleDown0">
+          <g fill="none" strokeLinejoin="round" strokeWidth="4">
+            <path
+              fill="#fff"
+              stroke="#fff"
+              d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z"
+            ></path>
+            <path stroke="#000" strokeLinecap="round" d="M24 15v18m9-9l-9 9l-9-9"></path>
+          </g>
+        </mask>
+      </defs>
+      <path fill="currentColor" d="M0 0h48v48H0z" mask="url(#ipSArrowCircleDown0)"></path>
+    </svg>
+  );
+}
+
+export function IconParkSolidArrowCircleUp(props) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48" {...props}>
+      <defs>
+        <mask id="ipSArrowCircleUp0">
+          <g fill="none" strokeLinejoin="round" strokeWidth="4">
+            <path
+              fill="#fff"
+              stroke="#fff"
+              d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20Z"
+            ></path>
+            <path stroke="#000" strokeLinecap="round" d="M24 33.5v-18m9 9l-9-9l-9 9"></path>
+          </g>
+        </mask>
+      </defs>
+      <path fill="currentColor" d="M0 0h48v48H0z" mask="url(#ipSArrowCircleUp0)"></path>
+    </svg>
+  );
+}
+
+export {
+  RemoveSection,
+  AddSection,
+  AddMorePoints,
+  IcBaselineRemoveCircle,
+  IcRoundAddCircle,
+  MoveSectionDown,
+  MoveSectionUp,
+};
