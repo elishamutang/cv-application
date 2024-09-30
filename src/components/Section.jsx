@@ -1,9 +1,9 @@
-import { Fragment, useState, forwardRef } from "react";
+import { useState, forwardRef } from "react";
 import ContentEditable from "react-contenteditable";
 import { AddSection, RemoveSection, AddMorePoints, IcBaselineRemoveCircle, IcRoundAddCircle } from "./Buttons";
 import getLargestId from "../helperFuncs";
 
-const SectionContent = forwardRef(({ content, handleContentChange, handleBlur }, ref) => {
+const BulletPoint = forwardRef(({ content, handleContentChange, handleBlur }, ref) => {
   return (
     <li>
       <ContentEditable html={content.value} onChange={handleContentChange} onBlur={handleBlur} ref={ref} />
@@ -11,7 +11,7 @@ const SectionContent = forwardRef(({ content, handleContentChange, handleBlur },
   );
 });
 
-SectionContent.displayName = "SectionContent";
+BulletPoint.displayName = "BulletPoint";
 
 function SectionHeader({ item, handleHeaderChange }) {
   return (
@@ -322,7 +322,7 @@ function Section() {
   }
 
   function addMoreBulletPoints(bulletPointsArr, contentId, sectionId) {
-    const largestId = getLargestId(bulletPointsArr);
+    const largestId = bulletPointsArr.length === 0 ? -1 : getLargestId(bulletPointsArr);
 
     const sectionCopy = [...section];
 
@@ -384,27 +384,21 @@ function Section() {
                       {/* Bullet-points */}
                       {content.bulletPoints.map((point) => {
                         return (
-                          <Fragment key={point.id}>
-                            <SectionContent
-                              content={point}
-                              ref={(element) => point.value === "" && focusOnElement(element)}
-                              bulletPointsArr={content.bulletPoints}
-                              handleContentChange={(e) => handleContentChange(e, sec.id, content.id, point.id)}
-                              handleBlur={(e) => handleBlur(e, sec.id, content.id, point.id)}
-                            />
-                            {point.id === getLargestId(content.bulletPoints) && (
-                              <AddMorePoints
-                                // On-click to add additional bullet point and disable button if no text input.
-                                onClick={() => addMoreBulletPoints(content.bulletPoints, content.id, sec.id)}
-                              />
-                            )}
-                          </Fragment>
+                          <BulletPoint
+                            key={point.id}
+                            content={point}
+                            ref={(element) => point.value === "" && focusOnElement(element)}
+                            bulletPointsArr={content.bulletPoints}
+                            handleContentChange={(e) => handleContentChange(e, sec.id, content.id, point.id)}
+                            handleBlur={(e) => handleBlur(e, sec.id, content.id, point.id)}
+                          />
                         );
                       })}
-                      {/* Fix this */}
-                      {/* {content.bulletPoints.length === 0 && (
-                        <AddMorePoints onClick={() => addMoreBulletPoints(content.bulletPoints, content.id, sec.id)} />
-                      )} */}
+                      <AddMorePoints
+                        // On-click to add additional bullet point and disable button if no text input.
+                        onClick={() => addMoreBulletPoints(content.bulletPoints, content.id, sec.id)}
+                        buttonDisable={content.buttonDisable}
+                      />
                     </ul>
                   </div>
                   <RemoveSection handleRemoveSectionContent={() => handleRemoveSectionContent(sec.id, content.id)} />
@@ -416,6 +410,7 @@ function Section() {
               sectionName={sec.title.toLowerCase()}
             />
             {/* Adds the 'addNewSection' button to the last element in the section array */}
+            {/* Change below code to use && */}
             {sec.id === getLargestId(section) ? (
               <button onClick={handleAddNewSection} className="addNewSection">
                 <IcRoundAddCircle />
