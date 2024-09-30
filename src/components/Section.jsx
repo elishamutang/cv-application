@@ -247,7 +247,7 @@ function Section() {
       if (sec.id === sectionId) {
         let newContent = [...sec.content];
 
-        // If current seciton is empty, use initial values.
+        // If current section is empty, use initial values.
         if (newContent.length === 0) {
           [newContent] = initialSection
             .filter((initialSec) => {
@@ -261,7 +261,7 @@ function Section() {
           const newEntry = newContent.length > 1 ? { ...newContent[1] } : { ...newContent[0] };
           newEntry.id = getLargestId(newContent) + 1;
 
-          newContent.push(newEntry);
+          newContent = [...sec.content, newEntry];
         }
 
         return { ...sec, content: newContent };
@@ -356,7 +356,7 @@ function Section() {
     }
   }
 
-  console.log(section);
+  // console.log(section);
 
   return (
     <>
