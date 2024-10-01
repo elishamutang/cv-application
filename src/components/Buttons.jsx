@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 
 // Remove experience under a specific section.
-function RemoveSection({ handleRemoveSectionContent }) {
+function RemoveSectionContent({ handleRemoveSectionContent }) {
   return (
     <button onClick={handleRemoveSectionContent} className="removeBtn">
       Remove
@@ -10,7 +10,7 @@ function RemoveSection({ handleRemoveSectionContent }) {
 }
 
 // Button to add additional experience under a specific section.
-function AddSection({ sectionName, handleAddMoreSectionContent }) {
+function AddSectionContent({ sectionName, handleAddMoreSectionContent }) {
   return (
     <button onClick={handleAddMoreSectionContent} className="addMore">
       Add {sectionName}
@@ -18,6 +18,7 @@ function AddSection({ sectionName, handleAddMoreSectionContent }) {
   );
 }
 
+// Button to add new bullet points.
 const AddMorePoints = forwardRef(({ onClick, buttonDisable }, ref) => {
   return (
     <button className="addNewBulletPoint" onClick={onClick} disabled={buttonDisable} ref={ref}>
@@ -28,6 +29,24 @@ const AddMorePoints = forwardRef(({ onClick, buttonDisable }, ref) => {
 
 AddMorePoints.displayName = "AddMorePoints";
 
+// Add new section like a section for Projects.
+function AddSection({ onClick }) {
+  return (
+    <button onClick={onClick} className="addNewSection">
+      <IcRoundAddCircle></IcRoundAddCircle>
+    </button>
+  );
+}
+
+function RemoveSection({ onClick }) {
+  return (
+    <button onClick={onClick} className="removeSection">
+      <IcBaselineRemoveCircle></IcBaselineRemoveCircle>
+    </button>
+  );
+}
+
+// Move section down.
 function MoveSectionDown() {
   return (
     <button className="moveSectionDown">
@@ -36,6 +55,7 @@ function MoveSectionDown() {
   );
 }
 
+// Move section up.
 function MoveSectionUp() {
   return (
     <button className="moveSectionUp">
@@ -108,11 +128,13 @@ export function IconParkSolidArrowCircleUp(props) {
 }
 
 export {
-  RemoveSection,
-  AddSection,
+  RemoveSectionContent,
+  AddSectionContent,
   AddMorePoints,
   IcBaselineRemoveCircle,
   IcRoundAddCircle,
   MoveSectionDown,
   MoveSectionUp,
+  AddSection,
+  RemoveSection,
 };
