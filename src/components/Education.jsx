@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ContentEditable from "react-contenteditable";
-import { AddSection, RemoveSection } from "./Buttons";
+import { AddSectionContent, RemoveSectionContent } from "./Buttons";
 import getLargestId from "../helperFuncs";
 
 function EducationContent({ content, handleContentChange }) {
@@ -133,10 +133,10 @@ function Education() {
               })}
             </ul>
           </div>
-          <RemoveSection handleRemove={() => handleRemove(item.id)} />
+          <RemoveSectionContent handleRemove={() => handleRemove(item.id)} />
         </div>
       ))}
-      <AddSection sectionName="education" handleClick={handleClick} />
+      <AddSectionContent sectionName="education" handleClick={handleClick} />
     </div>
   );
 }
