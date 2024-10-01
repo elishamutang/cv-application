@@ -372,9 +372,11 @@ function Section() {
         return (
           <div className="section-container" id={sec.title.toLowerCase()} key={sec.id}>
             <div className="title">
+              <input type="text" value={sec.title} onChange={(e) => handleSectionNameChange(e, sec.id)} />
+            </div>
+            <div className="move-and-remove">
               <MoveSectionUp />
               <MoveSectionDown />
-              <input type="text" value={sec.title} onChange={(e) => handleSectionNameChange(e, sec.id)} />
               {/* Append the removeSection button to ADDITIONAL sections only. First section can never be deleted. */}
               {/* Change below button to utilise custom component. */}
               {sec.id !== 0 ? (
