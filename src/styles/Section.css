@@ -54,6 +54,7 @@
   font-weight: bold;
   border: none;
   border-radius: 1rem;
+  width: 100%;
 }
 
 .addNewSection {
@@ -78,12 +79,14 @@
 .moveSectionUp {
   font-size: 1.2rem;
   color: red;
-  justify-self: end;
-  grid-area: removeBtn;
   padding: 0;
   border-radius: 50%;
   border: transparent;
 
   display: flex;
   justify-content: center;
+}
+
+.section ~ .section {
+  margin-top: 1rem;
 }
