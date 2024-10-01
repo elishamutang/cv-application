@@ -2,10 +2,10 @@ import { useState, forwardRef } from "react";
 import ContentEditable from "react-contenteditable";
 import {
   AddSection,
+  AddSectionContent,
   RemoveSection,
+  RemoveSectionContent,
   AddMorePoints,
-  IcBaselineRemoveCircle,
-  IcRoundAddCircle,
   MoveSectionDown,
   MoveSectionUp,
 } from "./Buttons";
@@ -378,14 +378,7 @@ function Section() {
               <MoveSectionUp />
               <MoveSectionDown />
               {/* Append the removeSection button to ADDITIONAL sections only. First section can never be deleted. */}
-              {/* Change below button to utilise custom component. */}
-              {sec.id !== 0 ? (
-                <button onClick={() => handleRemoveSection(sec.id)} className="removeSection">
-                  <IcBaselineRemoveCircle />
-                </button>
-              ) : (
-                ""
-              )}
+              {sec.id !== 0 && <RemoveSection onClick={() => handleRemoveSection(sec.id)} />}
             </div>
             {/* Content under a specific section (e.g Experience will contain 2 experiences) */}
             {sec.content.map((content) => {
@@ -414,23 +407,18 @@ function Section() {
                       />
                     </ul>
                   </div>
-                  <RemoveSection handleRemoveSectionContent={() => handleRemoveSectionContent(sec.id, content.id)} />
+                  <RemoveSectionContent
+                    handleRemoveSectionContent={() => handleRemoveSectionContent(sec.id, content.id)}
+                  />
                 </div>
               );
             })}
-            <AddSection
+            <AddSectionContent
               handleAddMoreSectionContent={() => handleAddMoreSectionContent(sec.id)}
               sectionName={sec.title.toLowerCase()}
             />
             {/* Adds the 'addNewSection' button to the last element in the section array */}
-            {/* Change below code to use && */}
-            {sec.id === getLargestId(section) ? (
-              <button onClick={handleAddNewSection} className="addNewSection">
-                <IcRoundAddCircle />
-              </button>
-            ) : (
-              ""
-            )}
+            {sec.id === getLargestId(section) && <AddSection onClick={handleAddNewSection} />}
           </div>
         );
       })}
