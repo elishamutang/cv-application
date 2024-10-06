@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import ContentEditable from "react-contenteditable";
-import { AddSectionContent, RemoveSectionContent } from "./Buttons";
+import { AddMorePoints, AddSectionContent, RemoveSectionContent } from "./Buttons";
 import getLargestId from "../helperFuncs";
 
-function EducationContent({ content, handleContentChange }) {
+const EducationContent = forwardRef(({ content, handleContentChange, onBlur }, ref) => {
   return (
     <li>
-      <ContentEditable html={content} onChange={handleContentChange} />
+      <ContentEditable html={content} onChange={handleContentChange} onBlur={onBlur} ref={ref} />
     </li>
   );
-}
+});
+
+EducationContent.displayName = "EducationContent";
 
 function Education({ moveSectionBtns }) {
   // Initial values
@@ -24,6 +26,7 @@ function Education({ moveSectionBtns }) {
         { id: 1, value: "Thesis: [Note: Optional]" },
         { id: 2, value: "Relevant Coursework: [Note: Optional. Awards and honors can also be listed here]" },
       ],
+      buttonDisable: false,
     },
   ];
 
@@ -56,7 +59,7 @@ function Education({ moveSectionBtns }) {
           }
         });
 
-        return { ...item, content: newContent };
+        return { ...item, content: newContent, buttonDisable: false };
       } else {
         return item;
       }
@@ -74,8 +77,8 @@ function Education({ moveSectionBtns }) {
     } else {
       newEducation = [...education];
 
-      const newEntry = { ...newEducation[0] };
-      const largestIdVal = getLargestId(newEducation);
+      const newEntry = { ...initialEducation[0] }; // Take section from initialEducation
+      const largestIdVal = getLargestId(education);
 
       newEntry.id = largestIdVal + 1;
 
@@ -100,11 +103,56 @@ function Education({ moveSectionBtns }) {
 
       setEducation(updatedEducation);
     }
-
-    // console.log(newEducation);
   }
 
-  // console.log(education);
+  function addNewPoint(itemId) {
+    // Prepare new entry
+    const newEntry = { id: getLargestId(education[0].content) + 1, value: "" };
+
+    const updatedEducation = education.map((item) => {
+      if (item.id === itemId) {
+        const updatedContent = [...item.content];
+
+        updatedContent.push(newEntry);
+
+        return { ...item, content: updatedContent, buttonDisable: true };
+      } else {
+        return item;
+      }
+    });
+
+    setEducation(updatedEducation);
+  }
+
+  function handleBlur(e, contentId, itemId) {
+    if (e.currentTarget.textContent === "") {
+      setEducation((prevEducation) => {
+        const updatedEducation = prevEducation.map((item) => {
+          if (item.id === itemId) {
+            const updatedContent = item.content.filter((content) => {
+              if (content.id !== contentId) {
+                return content;
+              }
+            });
+
+            return { ...item, content: updatedContent, buttonDisable: false };
+          } else {
+            return item;
+          }
+        });
+
+        return updatedEducation;
+      });
+    }
+  }
+
+  function focusOnElement(element) {
+    if (element) {
+      element.el.current.focus();
+    }
+  }
+
+  console.log(education);
 
   return (
     <div id="education">
@@ -129,15 +177,18 @@ function Education({ moveSectionBtns }) {
                     key={content.id}
                     content={content.value}
                     handleContentChange={(e) => handleContentChange(e, content.id, item.id)}
+                    onBlur={(e) => handleBlur(e, content.id, item.id)}
+                    ref={(element) => content.value === "" && focusOnElement(element)}
                   />
                 );
               })}
+              <AddMorePoints buttonDisable={item.buttonDisable} onClick={() => addNewPoint(item.id)} />
             </ul>
           </div>
-          <RemoveSectionContent handleRemove={() => handleRemove(item.id)} />
+          <RemoveSectionContent handleRemoveSectionContent={() => handleRemove(item.id)} />
         </div>
       ))}
-      <AddSectionContent sectionName="education" handleClick={handleClick} />
+      <AddSectionContent sectionName="education" handleAddMoreSectionContent={handleClick} />
     </div>
   );
 }
