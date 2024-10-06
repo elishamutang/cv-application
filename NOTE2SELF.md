@@ -2,6 +2,7 @@
 
 1. Complete the app
 2. Thinking of implementing the following features:
+
    1. ~~Add/remove bullet points.~~
    2. ~~Add/remove additional sections (ensure Education, Experience and Skills remain at a minimum).~~
    3. ~~Move sections up/down.~~
@@ -11,3 +12,6 @@
    7. Print to PDF.
    8. Share to others.
    9. Email to yourself.
+
+3. Bugs
+   1. Fix education-section sizing issue when removing bullet points.
