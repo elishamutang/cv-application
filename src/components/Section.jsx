@@ -6,8 +6,8 @@ import {
   RemoveSection,
   RemoveSectionContent,
   AddMorePoints,
-  MoveSectionDown,
   MoveSectionUp,
+  MoveSectionDown,
 } from "./Buttons";
 import getLargestId from "../helperFuncs";
 
@@ -40,7 +40,7 @@ function SectionHeader({ item, handleHeaderChange }) {
   );
 }
 
-function Section() {
+function Section({ moveSectionBtns }) {
   // Initial values
   const initialSection = [
     {
@@ -107,41 +107,41 @@ function Section() {
         },
       ],
     },
-    {
-      id: 1,
-      title: "Projects",
-      content: [
-        {
-          id: 0,
-          organisation: "Organisation",
-          position: "Position Title",
-          location: "City, State",
-          startDate: "Mmm YYYY",
-          endDate: "Mmm YYYY",
-          bulletPoints: [
-            {
-              id: 0,
-              value:
-                "Beginning with most recent position, describe your experience, skills, and resulting outcomes in bullet form.",
-            },
-            {
-              id: 1,
-              value:
-                "Begin each line with an action verb and include details that will help the reader understand your accomplishments, skills, knowledge, abilities, or achievements.",
-            },
-            {
-              id: 2,
-              value: "Quantify where possible.",
-            },
-            {
-              id: 3,
-              value: "Do not use personal pronouns; each line should be a phrase rather than a full sentence.",
-            },
-          ],
-          buttonDisable: false,
-        },
-      ],
-    },
+    // {
+    //   id: 1,
+    //   title: "Projects",
+    //   content: [
+    //     {
+    //       id: 0,
+    //       organisation: "Organisation",
+    //       position: "Position Title",
+    //       location: "City, State",
+    //       startDate: "Mmm YYYY",
+    //       endDate: "Mmm YYYY",
+    //       bulletPoints: [
+    //         {
+    //           id: 0,
+    //           value:
+    //             "Beginning with most recent position, describe your experience, skills, and resulting outcomes in bullet form.",
+    //         },
+    //         {
+    //           id: 1,
+    //           value:
+    //             "Begin each line with an action verb and include details that will help the reader understand your accomplishments, skills, knowledge, abilities, or achievements.",
+    //         },
+    //         {
+    //           id: 2,
+    //           value: "Quantify where possible.",
+    //         },
+    //         {
+    //           id: 3,
+    //           value: "Do not use personal pronouns; each line should be a phrase rather than a full sentence.",
+    //         },
+    //       ],
+    //       buttonDisable: false,
+    //     },
+    //   ],
+    // },
   ];
 
   const [section, setSection] = useState(initialSection);
@@ -320,7 +320,7 @@ function Section() {
   function handleAddNewSection() {
     const sectionCopy = [...section];
 
-    const latestSection = { ...initialSection[1] };
+    const latestSection = { ...initialSection[initialSection.length - 1] };
     const latestId = getLargestId(sectionCopy);
 
     latestSection.id = latestId + 1;
@@ -374,9 +374,16 @@ function Section() {
             <div className="title">
               <input type="text" value={sec.title} onChange={(e) => handleSectionNameChange(e, sec.id)} />
             </div>
-            <div className="move-and-remove">
-              <MoveSectionUp />
-              <MoveSectionDown />
+            <div className="move-section">
+              {/* Only render moveSectionBtns to first element in section array. */}
+              {sec.id === 0 ? (
+                moveSectionBtns
+              ) : (
+                <>
+                  <MoveSectionUp />
+                  <MoveSectionDown />
+                </>
+              )}
               {/* Append the removeSection button to ADDITIONAL sections only. First section can never be deleted. */}
               {sec.id !== 0 && <RemoveSection onClick={() => handleRemoveSection(sec.id)} />}
             </div>
