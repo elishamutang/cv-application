@@ -13,72 +13,63 @@ function MoveSectionComps({ handler }) {
   );
 }
 
-function EducationComp({ handler }) {
-  return <Education moveSectionBtns={<MoveSectionComps handler={handler} />} />;
-}
-
-function SectionComp({ handler }) {
-  return <Section moveSectionBtns={<MoveSectionComps handler={handler} />} />;
-}
-
-function SkillsAndInterestsComp({ handler }) {
-  return <SkillsAndInterests moveSectionBtns={<MoveSectionComps handler={handler} />} />;
-}
-
 export default function MainContent() {
   // Create an initial state array to store initial components.
-  // **Note: There must be a better way.
   const [initialOrder, setOrder] = useState([
-    { id: 0, comp: <EducationComp handler={(e) => moveSection(e, 0)} /> },
-    { id: 1, comp: <SectionComp handler={(e) => moveSection(e, 1)} /> },
-    { id: 2, comp: <SkillsAndInterestsComp handler={(e) => moveSection(e, 2)} /> },
+    { id: 0, comp: Education },
+    { id: 1, comp: Section },
+    { id: 2, comp: SkillsAndInterests },
   ]);
 
   function moveSection(e, itemId) {
-    const orderCopy = [...initialOrder];
+    const buttonTarget = e.currentTarget;
 
-    // Get elem being clicked.
-    const [elem] = orderCopy.filter((item) => item.id === itemId);
+    // Update state based on previous state
+    setOrder((order) => {
+      // Make shallow copy
+      const orderCopy = [...order];
 
-    // Get initial index of elem in initialOrder array.
-    let [initialElemIdx] = orderCopy
-      .map((item, idx) => {
-        if (item.id === itemId) {
-          return idx;
-        }
-      })
-      .filter((idx) => idx !== undefined);
+      // Get elem being clicked.
+      const [elem] = orderCopy.filter((item) => item.id === itemId);
 
-    // Remove clicked elem.
-    orderCopy.splice(initialElemIdx, 1);
+      // Get initial element index.
+      let [initialElemIdx] = orderCopy
+        .map((item, idx) => {
+          if (item.id === itemId) {
+            return idx;
+          }
+        })
+        .filter((idx) => idx !== undefined);
 
-    // New elem index
-    let newElemIdx;
+      // Remove clicked elem.
+      orderCopy.splice(initialElemIdx, 1);
 
-    // Identify which move button is clicked (e.g move up or down)
-    if (e.currentTarget.className.includes("Up")) {
-      newElemIdx = initialElemIdx === 0 ? orderCopy.length : initialElemIdx - 1;
-    } else {
-      newElemIdx = initialElemIdx === orderCopy.length ? 0 : initialElemIdx + 1;
-    }
+      // New elem index
+      let newElemIdx;
 
-    console.log(`Initial index: ${initialElemIdx}`);
-    console.log(`New index: ${newElemIdx}`);
+      // Identify which move button is clicked (e.g move up or down)
+      if (buttonTarget.className.includes("Up")) {
+        newElemIdx = initialElemIdx === 0 ? orderCopy.length : initialElemIdx - 1;
+      } else {
+        newElemIdx = initialElemIdx === orderCopy.length ? 0 : initialElemIdx + 1;
+      }
 
-    // Re-insert into orderCopy array.
-    orderCopy.splice(newElemIdx, 0, elem);
+      // Re-insert into orderCopy array.
+      orderCopy.splice(newElemIdx, 0, elem);
 
-    console.log(orderCopy);
-    console.log(initialOrder);
-
-    // Call set function.
-    setOrder(orderCopy);
+      return orderCopy;
+    });
   }
 
   return (
     <>
       {initialOrder.map((item) => {
-        return <Fragment key={item.id}>{item.comp}</Fragment>;
+        const { comp: Component } = item;
+        return (
+          <Fragment key={item.id}>
+            <Component moveSectionBtns={<MoveSectionComps handler={(e) => moveSection(e, item.id)} />} />
+          </Fragment>
+        );
       })}
     </>
   );
