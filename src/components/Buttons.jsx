@@ -87,7 +87,7 @@ function IcRoundAddCircle(props) {
   );
 }
 
-export function IconParkSolidArrowCircleDown(props) {
+function IconParkSolidArrowCircleDown(props) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48" {...props}>
       <defs>
@@ -107,7 +107,7 @@ export function IconParkSolidArrowCircleDown(props) {
   );
 }
 
-export function IconParkSolidArrowCircleUp(props) {
+function IconParkSolidArrowCircleUp(props) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48" {...props}>
       <defs>
