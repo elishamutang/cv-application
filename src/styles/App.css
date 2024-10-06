@@ -60,6 +60,12 @@ input:hover {
   gap: 0.5rem;
 }
 
+.education-section,
+.section,
+.skills-interests-content {
+  width: 100%;
+}
+
 .education-section input,
 .section input {
   font-size: 0.8rem;
