@@ -5,7 +5,7 @@
    1. ~~Add/remove bullet points.~~
    2. ~~Add/remove additional sections (ensure Education, Experience and Skills remain at a minimum).~~
    3. ~~Move sections up/down.~~
-   4. Delete field if user leaves as blank (in SkillsAndInterests component).
+   4. ~~Delete field if user leaves as blank (in SkillsAndInterests component).~~
    5. Add a hover effect section when user hovers over Remove button.
    6. Add Editing mode.
    7. Print to PDF.
