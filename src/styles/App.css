@@ -121,7 +121,7 @@ input:hover {
   color: grey;
 }
 
-.move-and-remove {
+.move-section {
   display: flex;
   justify-content: center;
   gap: 0.3rem;
