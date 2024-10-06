@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ContentEditable from "react-contenteditable";
+import { AddMorePoints } from "./Buttons";
 
 function SkillsAndInterests({ moveSectionBtns }) {
   const [content, setContent] = useState({
@@ -26,6 +27,7 @@ function SkillsAndInterests({ moveSectionBtns }) {
         value: "List activities you enjoy that may spark interview conversation",
       },
     ],
+    buttonDisable: false,
   });
 
   function handleTitleChange(e) {
@@ -44,8 +46,8 @@ function SkillsAndInterests({ moveSectionBtns }) {
     setContent({ ...content, info: newInfo });
   }
 
+  // Remove element if user leaves BOTH heading and info fields blank.
   function handleBlur(itemId) {
-    // Remove element if user leaves BOTH heading and info fields blank.
     const infoCopy = [...content.info];
 
     const checkBlanks = () => {
@@ -71,6 +73,10 @@ function SkillsAndInterests({ moveSectionBtns }) {
         return { ...prevContent, info: updatedInfo };
       });
     }
+  }
+
+  function addNewPoint() {
+    console.log(content.buttonDisable);
   }
 
   return (
@@ -99,6 +105,7 @@ function SkillsAndInterests({ moveSectionBtns }) {
               </li>
             );
           })}
+          <AddMorePoints buttonDisable={content.buttonDisable} onClick={addNewPoint} />
         </ul>
       </div>
     </div>
