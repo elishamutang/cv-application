@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ContentEditable from "react-contenteditable";
 import { AddMorePoints } from "./Buttons";
+import getLargestId from "../helperFuncs";
 
 function SkillsAndInterests({ moveSectionBtns }) {
   const [content, setContent] = useState({
@@ -43,7 +44,7 @@ function SkillsAndInterests({ moveSectionBtns }) {
       }
     });
 
-    setContent({ ...content, info: newInfo });
+    setContent({ ...content, info: newInfo, buttonDisable: false });
   }
 
   // Remove element if user leaves BOTH heading and info fields blank.
@@ -70,13 +71,26 @@ function SkillsAndInterests({ moveSectionBtns }) {
           }
         });
 
-        return { ...prevContent, info: updatedInfo };
+        return { ...prevContent, info: updatedInfo, buttonDisable: false };
       });
     }
   }
 
   function addNewPoint() {
-    console.log(content.buttonDisable);
+    const infoCopy = [...content.info];
+
+    const newEntry = { id: getLargestId(infoCopy) + 1, heading: "", value: "Edit here.." };
+    infoCopy.push(newEntry);
+
+    setContent((prevContent) => {
+      return { ...prevContent, info: infoCopy, buttonDisable: true };
+    });
+  }
+
+  function focusOnElement(element) {
+    if (element) {
+      element.el.current.focus();
+    }
   }
 
   return (
@@ -95,6 +109,7 @@ function SkillsAndInterests({ moveSectionBtns }) {
                   html={item.heading}
                   onChange={(e) => handleInfoChange(e, item.id, "heading")}
                   onBlur={() => handleBlur(item.id)}
+                  ref={(element) => item.heading === "" && focusOnElement(element)}
                 />
                 <ContentEditable
                   className="info"
