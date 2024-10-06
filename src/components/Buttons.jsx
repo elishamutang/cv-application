@@ -1,5 +1,3 @@
-import { forwardRef } from "react";
-
 // Remove experience under a specific section.
 function RemoveSectionContent({ handleRemoveSectionContent }) {
   return (
@@ -19,15 +17,13 @@ function AddSectionContent({ sectionName, handleAddMoreSectionContent }) {
 }
 
 // Button to add new bullet points.
-const AddMorePoints = forwardRef(({ onClick, buttonDisable }, ref) => {
+function AddMorePoints({ onClick, buttonDisable }) {
   return (
-    <button className="addNewBulletPoint" onClick={onClick} disabled={buttonDisable} ref={ref}>
-      <IcRoundAddCircle></IcRoundAddCircle>
+    <button className="addNewPoint" onClick={onClick} disabled={buttonDisable}>
+      <IcRoundAddCircle />
     </button>
   );
-});
-
-AddMorePoints.displayName = "AddMorePoints";
+}
 
 // Add new section like a section for Projects.
 function AddSection({ onClick }) {
