@@ -22,6 +22,8 @@ export default function MainContent() {
   ]);
 
   function moveSection(e, itemId) {
+    // Alternate way:
+
     const orderCopy = [...initialOrder];
 
     // Get elem being clicked.
