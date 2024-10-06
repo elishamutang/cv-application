@@ -101,7 +101,7 @@ input:hover {
   margin-bottom: 2rem;
 }
 
-.addNewBulletPoint {
+.addNewPoint {
   margin-top: 0.5rem;
   border-radius: 50%;
   display: flex;
@@ -112,7 +112,7 @@ input:hover {
   color: grey;
 }
 
-.addNewBulletPoint:disabled {
+.addNewPoint:disabled {
   opacity: 0.3;
 }
 
