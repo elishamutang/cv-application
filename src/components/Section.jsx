@@ -1,14 +1,6 @@
 import { useState, forwardRef } from "react";
 import ContentEditable from "react-contenteditable";
-import {
-  AddSection,
-  AddSectionContent,
-  RemoveSection,
-  RemoveSectionContent,
-  AddMorePoints,
-  MoveSectionUp,
-  MoveSectionDown,
-} from "./Buttons";
+import { AddSection, AddSectionContent, RemoveSection, RemoveSectionContent, AddMorePoints } from "./Buttons";
 import getLargestId from "../helperFuncs";
 
 const BulletPoint = forwardRef(({ content, handleContentChange, handleBlur }, ref) => {
@@ -257,13 +249,7 @@ function Section({ moveSectionBtns }) {
 
         // If current section is empty, use initial values.
         if (newContent.length === 0) {
-          [newContent] = initialSection
-            .filter((initialSec) => {
-              if (initialSec.id === sectionId) return initialSec;
-            })
-            .map((item) => item.content);
-
-          newContent = [newContent[0]]; // Adds the first entry of that section in intialSection.content array.
+          newContent = [...initialSection[0].content].slice(0, 1); // Adds the first entry of that section in intialSection.content array.
         } else {
           // If not emtpy, add to current state
           const newEntry = newContent.length > 1 ? { ...newContent[1] } : { ...newContent[0] };
@@ -284,13 +270,13 @@ function Section({ moveSectionBtns }) {
   function handleRemoveSectionContent(sectionId, contentId) {
     const sectionCopy = [...section];
 
-    if (sectionCopy.length === 1) {
-      setSection([]);
-    } else {
-      const updatedSection = sectionCopy.map((item) => {
-        if (item.id === sectionId) {
-          const newContent = [...item.content];
+    const updatedSection = sectionCopy.map((item) => {
+      if (item.id === sectionId) {
+        const newContent = [...item.content];
 
+        if (newContent.length === 1) {
+          return { ...item, content: [] };
+        } else {
           const updatedContent = newContent.filter((content) => {
             if (content.id !== contentId) {
               return content;
@@ -298,13 +284,13 @@ function Section({ moveSectionBtns }) {
           });
 
           return { ...item, content: updatedContent };
-        } else {
-          return item;
         }
-      });
+      } else {
+        return item;
+      }
+    });
 
-      setSection(updatedSection);
-    }
+    setSection(updatedSection);
   }
 
   function handleRemoveSection(sectionId) {
@@ -376,14 +362,7 @@ function Section({ moveSectionBtns }) {
             </div>
             <div className="move-section">
               {/* Only render moveSectionBtns to first element in section array. */}
-              {sec.id === 0 ? (
-                moveSectionBtns
-              ) : (
-                <>
-                  <MoveSectionUp />
-                  <MoveSectionDown />
-                </>
-              )}
+              {sec.id === 0 && moveSectionBtns}
               {/* Append the removeSection button to ADDITIONAL sections only. First section can never be deleted. */}
               {sec.id !== 0 && <RemoveSection onClick={() => handleRemoveSection(sec.id)} />}
             </div>
