@@ -47,18 +47,18 @@ function RemoveSection({ onClick }) {
 }
 
 // Move section down.
-function MoveSectionDown() {
+function MoveSectionDown({ onClick }) {
   return (
-    <button className="moveSectionDown">
+    <button onClick={onClick} className="moveSectionDown">
       <IconParkSolidArrowCircleDown></IconParkSolidArrowCircleDown>
     </button>
   );
 }
 
 // Move section up.
-function MoveSectionUp() {
+function MoveSectionUp({ onClick }) {
   return (
-    <button className="moveSectionUp">
+    <button onClick={onClick} className="moveSectionUp">
       <IconParkSolidArrowCircleUp></IconParkSolidArrowCircleUp>
     </button>
   );

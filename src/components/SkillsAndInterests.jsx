@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ContentEditable from "react-contenteditable";
 
-function SkillsAndInterests() {
+function SkillsAndInterests({ moveSectionBtns }) {
   const [content, setContent] = useState({
     title: "Skills and Interests",
     info: [
@@ -49,6 +49,7 @@ function SkillsAndInterests() {
       <div className="title">
         <input type="text" value={content.title} onChange={handleTitleChange} />
       </div>
+      <div className="move-section">{moveSectionBtns}</div>
       <div className="skills-interests-content">
         <ul>
           {content.info.map((item) => {

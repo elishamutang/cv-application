@@ -11,7 +11,7 @@ function EducationContent({ content, handleContentChange }) {
   );
 }
 
-function Education() {
+function Education({ moveSectionBtns }) {
   // Initial values
   const initialEducation = [
     {
@@ -109,6 +109,7 @@ function Education() {
   return (
     <div id="education">
       <div className="title">Education</div>
+      <div className="move-section">{moveSectionBtns}</div>
       {education.map((item) => (
         <div key={item.id} className="education-section">
           <ContentEditable html={item.institution} className="institution" onChange={(e) => handleChange(e, item.id)} />
