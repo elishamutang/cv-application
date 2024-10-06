@@ -31,3 +31,7 @@
   border-radius: 1rem;
   border: none;
 }
+
+.education-section ~ .education-section {
+  margin-top: 1rem;
+}
