@@ -44,6 +44,12 @@ function SkillsAndInterests({ moveSectionBtns }) {
     setContent({ ...content, info: newInfo });
   }
 
+  function handleBlur(e) {
+    // Remove element if user leaves blank.
+
+    console.log(e.currentTarget.textContent);
+  }
+
   return (
     <div id="skills-interests">
       <div className="title">
@@ -59,11 +65,13 @@ function SkillsAndInterests({ moveSectionBtns }) {
                   className="heading"
                   html={item.heading}
                   onChange={(e) => handleInfoChange(e, item.id, "heading")}
+                  onBlur={handleBlur}
                 />
                 <ContentEditable
                   className="info"
                   html={item.value}
                   onChange={(e) => handleInfoChange(e, item.id, "value")}
+                  onBlur={handleBlur}
                 />
               </li>
             );
