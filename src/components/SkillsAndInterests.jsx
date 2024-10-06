@@ -44,10 +44,33 @@ function SkillsAndInterests({ moveSectionBtns }) {
     setContent({ ...content, info: newInfo });
   }
 
-  function handleBlur(e) {
-    // Remove element if user leaves blank.
+  function handleBlur(itemId) {
+    // Remove element if user leaves BOTH heading and info fields blank.
+    const infoCopy = [...content.info];
 
-    console.log(e.currentTarget.textContent);
+    const checkBlanks = () => {
+      for (let i = 0; i < infoCopy.length; i++) {
+        if (infoCopy[i].id === itemId) {
+          if (infoCopy[i].heading === "" && infoCopy[i].value === "") {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      }
+    };
+
+    if (checkBlanks() === true) {
+      setContent((prevContent) => {
+        const updatedInfo = prevContent.info.filter((item) => {
+          if (item.id !== itemId) {
+            return item;
+          }
+        });
+
+        return { ...prevContent, info: updatedInfo };
+      });
+    }
   }
 
   return (
@@ -65,13 +88,13 @@ function SkillsAndInterests({ moveSectionBtns }) {
                   className="heading"
                   html={item.heading}
                   onChange={(e) => handleInfoChange(e, item.id, "heading")}
-                  onBlur={handleBlur}
+                  onBlur={() => handleBlur(item.id)}
                 />
                 <ContentEditable
                   className="info"
                   html={item.value}
                   onChange={(e) => handleInfoChange(e, item.id, "value")}
-                  onBlur={handleBlur}
+                  onBlur={() => handleBlur(item.id)}
                 />
               </li>
             );
