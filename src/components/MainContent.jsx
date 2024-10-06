@@ -13,25 +13,12 @@ function MoveSectionComps({ handler }) {
   );
 }
 
-function EducationComp({ handler }) {
-  return <Education moveSectionBtns={<MoveSectionComps handler={handler} />} />;
-}
-
-function SectionComp({ handler }) {
-  return <Section moveSectionBtns={<MoveSectionComps handler={handler} />} />;
-}
-
-function SkillsAndInterestsComp({ handler }) {
-  return <SkillsAndInterests moveSectionBtns={<MoveSectionComps handler={handler} />} />;
-}
-
 export default function MainContent() {
   // Create an initial state array to store initial components.
-  // **Note: There must be a better way.
   const [initialOrder, setOrder] = useState([
-    { id: 0, comp: <EducationComp handler={(e) => moveSection(e, 0)} /> },
-    { id: 1, comp: <SectionComp handler={(e) => moveSection(e, 1)} /> },
-    { id: 2, comp: <SkillsAndInterestsComp handler={(e) => moveSection(e, 2)} /> },
+    { id: 0, comp: Education },
+    { id: 1, comp: Section },
+    { id: 2, comp: SkillsAndInterests },
   ]);
 
   function moveSection(e, itemId) {
@@ -62,14 +49,8 @@ export default function MainContent() {
       newElemIdx = initialElemIdx === orderCopy.length ? 0 : initialElemIdx + 1;
     }
 
-    console.log(`Initial index: ${initialElemIdx}`);
-    console.log(`New index: ${newElemIdx}`);
-
     // Re-insert into orderCopy array.
     orderCopy.splice(newElemIdx, 0, elem);
-
-    console.log(orderCopy);
-    console.log(initialOrder);
 
     // Call set function.
     setOrder(orderCopy);
@@ -78,7 +59,13 @@ export default function MainContent() {
   return (
     <>
       {initialOrder.map((item) => {
-        return <Fragment key={item.id}>{item.comp}</Fragment>;
+        const { comp: Component } = item;
+
+        return (
+          <Fragment key={item.id}>
+            <Component moveSectionBtns={<MoveSectionComps handler={(e) => moveSection(e, item.id)} />} />
+          </Fragment>
+        );
       })}
     </>
   );
