@@ -8,7 +8,7 @@
    3. ~~Move sections up/down.~~
    4. ~~Delete field if user leaves as blank (in SkillsAndInterests component).~~
    5. Add a hover effect on section when user hovers over Remove button.
-   6. Add focus on new entry for SkillsAndInterests component (either add focus or just add placeholder).
+   6. ~~Add focus on new entry for SkillsAndInterests component (either add focus or just add placeholder).~~
    7. Add Editing / Viewing mode.
    8. Print to PDF.
    9. Share to others.
