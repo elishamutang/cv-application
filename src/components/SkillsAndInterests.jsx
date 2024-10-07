@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import ContentEditable from "react-contenteditable";
 import { AddMorePoints } from "./Buttons";
 import getLargestId from "../helperFuncs";
@@ -87,11 +87,11 @@ function SkillsAndInterests({ moveSectionBtns }) {
     });
   }
 
-  function focusOnElement(element) {
-    if (element) {
+  const focusOnElement = useCallback((element) => {
+    if (element.el.current && element.el.current.textContent === "") {
       element.el.current.focus();
     }
-  }
+  }, []);
 
   return (
     <div id="skills-interests">
@@ -109,7 +109,7 @@ function SkillsAndInterests({ moveSectionBtns }) {
                   html={item.heading}
                   onChange={(e) => handleInfoChange(e, item.id, "heading")}
                   onBlur={() => handleBlur(item.id)}
-                  ref={(element) => item.heading === "" && focusOnElement(element)}
+                  ref={focusOnElement}
                 />
                 <ContentEditable
                   className="info"
