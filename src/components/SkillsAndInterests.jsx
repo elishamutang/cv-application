@@ -63,7 +63,7 @@ function SkillsAndInterests({ moveSectionBtns }) {
       }
     };
 
-    if (checkBlanks() === true) {
+    if (checkBlanks()) {
       setContent((prevContent) => {
         const updatedInfo = prevContent.info.filter((item) => {
           if (item.id !== itemId) {
