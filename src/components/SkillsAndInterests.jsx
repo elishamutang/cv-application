@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import ContentEditable from "react-contenteditable";
 import { AddMorePoints } from "./Buttons";
 import getLargestId from "../helperFuncs";
@@ -79,19 +79,13 @@ function SkillsAndInterests({ moveSectionBtns }) {
   function addNewPoint() {
     const infoCopy = [...content.info];
 
-    const newEntry = { id: getLargestId(infoCopy) + 1, heading: "", value: "Edit here.." };
+    const newEntry = { id: getLargestId(infoCopy) + 1, heading: "Insert title...", value: "Edit here.." };
     infoCopy.push(newEntry);
 
     setContent((prevContent) => {
       return { ...prevContent, info: infoCopy, buttonDisable: true };
     });
   }
-
-  const focusOnElement = useCallback((element) => {
-    if (element.el.current && element.el.current.textContent === "") {
-      element.el.current.focus();
-    }
-  }, []);
 
   return (
     <div id="skills-interests">
@@ -109,7 +103,6 @@ function SkillsAndInterests({ moveSectionBtns }) {
                   html={item.heading}
                   onChange={(e) => handleInfoChange(e, item.id, "heading")}
                   onBlur={() => handleBlur(item.id)}
-                  ref={focusOnElement}
                 />
                 <ContentEditable
                   className="info"
