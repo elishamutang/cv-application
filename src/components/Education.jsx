@@ -1,4 +1,4 @@
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import ContentEditable from "react-contenteditable";
 import { AddMorePoints, AddSectionContent, RemoveSectionContent } from "./Buttons";
 import getLargestId from "../helperFuncs";
@@ -30,7 +30,17 @@ function Education({ moveSectionBtns }) {
     },
   ];
 
-  const [education, setEducation] = useState(initialEducation);
+  // Declare initial state
+  // If details stored in local storage, fetch them and set them as initial state else use initialEducation.
+  const [education, setEducation] = useState(() => {
+    const storedEducation = localStorage.getItem("education");
+    return storedEducation ? JSON.parse(storedEducation) : initialEducation;
+  });
+
+  // Call useEffect to set state in local storage.
+  useEffect(() => {
+    localStorage.setItem("education", JSON.stringify(education));
+  }, [education]);
 
   // Handle header of each education entry.
   function handleChange(e, itemId) {
@@ -152,7 +162,7 @@ function Education({ moveSectionBtns }) {
     }
   }
 
-  console.log(education);
+  // console.log(education);
 
   return (
     <div id="education">
