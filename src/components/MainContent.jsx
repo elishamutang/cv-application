@@ -14,12 +14,35 @@ function MoveSectionComps({ handler }) {
 }
 
 export default function MainContent() {
-  // Create an initial state array to store initial components.
-  const [initialOrder, setOrder] = useState([
+  const initialOrder = [
     { id: 0, comp: Education },
     { id: 1, comp: Section },
     { id: 2, comp: SkillsAndInterests },
-  ]);
+  ];
+
+  // Create an initial state array to store initial components.
+  // If a local copy of order exists, use that as initial state.
+  const [order, setOrder] = useState(() => {
+    const checkLocal = localStorage.getItem("order");
+
+    if (checkLocal) {
+      const localCopy = JSON.parse(checkLocal);
+
+      const localOrder = localCopy.map((item) => {
+        const [update] = initialOrder.filter((elem) => {
+          if (elem.id === item.id) {
+            return elem.comp;
+          }
+        });
+
+        return update;
+      });
+
+      return localOrder;
+    } else {
+      return initialOrder;
+    }
+  });
 
   function moveSection(e, itemId) {
     const buttonTarget = e.currentTarget;
@@ -57,13 +80,16 @@ export default function MainContent() {
       // Re-insert into orderCopy array.
       orderCopy.splice(newElemIdx, 0, elem);
 
+      // Remember order of sections
+      localStorage.setItem("order", JSON.stringify(orderCopy));
+
       return orderCopy;
     });
   }
 
   return (
     <>
-      {initialOrder.map((item) => {
+      {order.map((item) => {
         const { comp: Component } = item;
         return (
           <Fragment key={item.id}>
