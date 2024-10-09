@@ -39,8 +39,6 @@ function SkillsAndInterests({ moveSectionBtns }) {
 
   useEffect(() => {
     localStorage.setItem("skillsAndInterests", JSON.stringify(content));
-
-    console.log(JSON.parse(localStorage.getItem("skillsAndInterests")));
   }, [content]);
 
   function handleTitleChange(e) {
