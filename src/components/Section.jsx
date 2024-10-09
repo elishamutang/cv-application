@@ -1,4 +1,4 @@
-import { useState, forwardRef } from "react";
+import { useState, forwardRef, useEffect } from "react";
 import ContentEditable from "react-contenteditable";
 import { AddSection, AddSectionContent, RemoveSection, RemoveSectionContent, AddMorePoints } from "./Buttons";
 import getLargestId from "../helperFuncs";
@@ -136,7 +136,14 @@ function Section({ moveSectionBtns }) {
     // },
   ];
 
-  const [section, setSection] = useState(initialSection);
+  const [section, setSection] = useState(() => {
+    const localCopy = localStorage.getItem("sections");
+    return localCopy ? JSON.parse(localCopy) : initialSection;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("sections", JSON.stringify(section));
+  }, [section]);
 
   function handleSectionNameChange(e, itemId) {
     setSection(
