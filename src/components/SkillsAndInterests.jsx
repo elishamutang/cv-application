@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ContentEditable from "react-contenteditable";
 import { AddMorePoints } from "./Buttons";
 import getLargestId from "../helperFuncs";
 
 function SkillsAndInterests({ moveSectionBtns }) {
-  const [content, setContent] = useState({
+  const initialContent = {
     title: "Skills and Interests",
     info: [
       {
@@ -29,7 +29,19 @@ function SkillsAndInterests({ moveSectionBtns }) {
       },
     ],
     buttonDisable: false,
+  };
+
+  const [content, setContent] = useState(() => {
+    const gotLocal = localStorage.getItem("skillsAndInterests");
+
+    return gotLocal ? JSON.parse(gotLocal) : initialContent;
   });
+
+  useEffect(() => {
+    localStorage.setItem("skillsAndInterests", JSON.stringify(content));
+
+    console.log(JSON.parse(localStorage.getItem("skillsAndInterests")));
+  }, [content]);
 
   function handleTitleChange(e) {
     setContent({ ...content, title: e.target.value });
