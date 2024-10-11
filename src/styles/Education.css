@@ -29,7 +29,19 @@
   color: white;
   font-weight: bold;
   border-radius: 1rem;
-  border: none;
+  border: 1px solid transparent;
+  filter: brightness(0.8);
+  transition: 0.3s;
+}
+
+.removeBtn:hover {
+  filter: brightness(1.2);
+  transition: 0.3s;
+}
+
+.removeBtn:focus {
+  border: 1px solid transparent;
+  outline: none;
 }
 
 .education-section ~ .education-section {

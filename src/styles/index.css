@@ -47,7 +47,7 @@ button {
   box-shadow: 1px 1px 3px 0px hsl(0, 0%, 20%);
 }
 button:hover {
-  border-color: #646cff;
+  border: 1px solid transparent;
 }
 button:focus,
 button:focus-visible {
