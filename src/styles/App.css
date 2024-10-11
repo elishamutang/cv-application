@@ -114,7 +114,8 @@ input:hover {
   justify-content: center;
   font-size: 1.5rem;
   padding: 0%;
-  border: none;
+  border: 1px solid transparent;
+  background-color: hsl(0, 0%, 30%);
   color: grey;
 }
 
@@ -125,15 +126,17 @@ input:hover {
 .moveSectionDown,
 .moveSectionUp {
   color: grey;
+  box-shadow: 1px 1px 2px 0px hsl(0, 0%, 20%);
 }
 
 .move-section {
   display: flex;
   justify-content: center;
   gap: 0.3rem;
-  border: 1px solid lightgray;
-  background-color: lightgray;
+  border: 1px solid hsl(0, 0%, 30%);
+  background-color: hsl(0, 0%, 30%);
   width: fit-content;
   padding: 0.2rem;
   border-radius: 0.5rem;
+  box-shadow: 1px 1px 2px 0px hsl(0, 0%, 20%);
 }

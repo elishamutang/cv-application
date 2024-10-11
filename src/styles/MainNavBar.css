@@ -3,7 +3,7 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-areas: "edit reset pdf";
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 
   border: 1px solid lightgray;
   border-radius: 1.3rem;
@@ -13,12 +13,25 @@
 
 .mainNav > * {
   color: white;
+  font-weight: bold;
   font-size: 1em;
   border: 1px solid hsl(0, 0%, 35%);
   box-shadow: 2px 1px 5px 1px hsl(0, 0%, 20%);
   border-radius: 1rem;
   background-color: hsl(0, 0%, 40%);
   padding: 0.5rem;
+  outline: none;
+}
+
+.mainNav > button:hover {
+  border: 1px solid transparent;
+  outline: none;
+  filter: brightness(1.2);
+  transition: 0.3s;
+}
+
+.mainNav > button:focus {
+  outline: none;
 }
 
 .reset {
@@ -35,8 +48,10 @@
 
 .mainNav > *:not(.active) {
   filter: brightness(0.8);
+  transition: 0.3s;
 }
 
 .active {
   filter: brightness(1.2);
+  transition: 0.3s;
 }
