@@ -9,7 +9,7 @@ export function ResetLocalStorage({ active, onClick }) {
 export function Mode({ active, onClick, isEditing }) {
   return (
     <button className={active ? "Mode active" : "Mode"} onClick={onClick}>
-      Mode: {isEditing ? "Editing" : "Viewing"}
+      {isEditing ? "Editing" : "Viewing"}
     </button>
   );
 }
