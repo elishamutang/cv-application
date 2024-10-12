@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function Header() {
+function Header({ editMode }) {
   const [fullName, setFullName] = useState(() => {
     const checkLocal = localStorage.getItem("name");
     return checkLocal ? checkLocal : "John Doe";
@@ -42,7 +42,7 @@ function Header() {
   return (
     <div id="header">
       <div id="name">
-        <input type="text" id="fullName" value={fullName} onChange={handleName} />
+        {editMode ? <input type="text" id="fullName" value={fullName} onChange={handleName} /> : <h1>{fullName}</h1>}
       </div>
       <div id="contact">
         {contactDetails.map((item) => {
