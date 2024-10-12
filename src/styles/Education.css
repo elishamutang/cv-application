@@ -30,7 +30,6 @@
   font-weight: bold;
   border-radius: 1rem;
   border: 1px solid transparent;
-  filter: brightness(0.8);
   transition: 0.3s;
 }
 
