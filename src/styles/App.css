@@ -6,7 +6,9 @@
   color: black;
 }
 
-input {
+input,
+#contact > p,
+#name > h1 {
   appearance: none;
   background-color: transparent;
   padding: 2% 0;
@@ -45,12 +47,9 @@ input:hover {
 }
 
 #name > h1 {
-  padding: 2% 0;
-  font-size: 1.5rem;
-  font-weight: bold;
   border: 1px solid transparent;
   border-bottom: 1px solid black;
-  width: 100%;
+  border-radius: 0;
   line-height: normal;
 }
 
@@ -59,7 +58,8 @@ input:hover {
   display: flex;
 }
 
-#contact > input {
+#contact > input,
+#contact > p {
   color: hsl(0, 0%, 50%);
   font-weight: normal;
   font-size: 0.6rem;
