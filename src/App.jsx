@@ -55,8 +55,8 @@ function App() {
           );
         })}
       </MainNav>
-      <Header />
-      <MainContent />
+      <Header editMode={editMode} />
+      <MainContent editMode={editMode} />
     </>
   );
 }
