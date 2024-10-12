@@ -45,9 +45,11 @@ function Header({ editMode }) {
         {editMode ? <input type="text" id="fullName" value={fullName} onChange={handleName} /> : <h1>{fullName}</h1>}
       </div>
       <div id="contact">
-        {contactDetails.map((item) => {
-          return <input key={item.id} placeholder={item.field} onChange={handleContactChange} />;
-        })}
+        {editMode
+          ? contactDetails.map((item) => (
+              <input key={item.id} placeholder={item.field} onChange={handleContactChange} />
+            ))
+          : contactDetails.map((item) => <p key={item.id}>{item.field}</p>)}
       </div>
     </div>
   );
