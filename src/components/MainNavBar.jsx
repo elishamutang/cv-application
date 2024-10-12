@@ -8,10 +8,10 @@ function ResetLocalStorage({ active, onClick }) {
   );
 }
 
-function EditDoc({ active, onClick }) {
+function Mode({ active, onClick, isEditing }) {
   return (
-    <button className={active ? "editDoc active" : "editDoc"} onClick={onClick}>
-      Edit
+    <button className={active ? "Mode active" : "Mode"} onClick={onClick}>
+      Mode: {isEditing ? "Editing" : "Viewing"}
     </button>
   );
 }
@@ -26,7 +26,7 @@ function PrintToPDF({ active, onClick }) {
 
 export default function MainNav() {
   const [activeComps, setActiveComps] = useState([
-    { id: 0, comp: EditDoc, isActive: false },
+    { id: 0, comp: Mode, isActive: false, isEditing: true },
     { id: 1, comp: ResetLocalStorage, isActive: false },
     { id: 2, comp: PrintToPDF, isActive: false },
   ]);
@@ -35,6 +35,10 @@ export default function MainNav() {
     setActiveComps((prevActiveComps) => {
       const updatedActiveComps = prevActiveComps.map((item) => {
         if (item.id === itemId) {
+          if (item.isEditing !== undefined) {
+            return { ...item, isActive: true, isEditing: !item.isEditing };
+          }
+
           return { ...item, isActive: true };
         } else {
           return { ...item, isActive: false };
@@ -45,12 +49,21 @@ export default function MainNav() {
     });
   }
 
+  // console.log(activeComps);
+
   return (
     <div className="mainNav">
       {activeComps.map((item) => {
         const { comp: Component } = item;
 
-        return <Component key={item.id} active={item.isActive} onClick={() => updateActiveComps(item.id)} />;
+        return (
+          <Component
+            key={item.id}
+            active={item.isActive}
+            isEditing={item.isEditing}
+            onClick={() => updateActiveComps(item.id)}
+          />
+        );
       })}
     </div>
   );
