@@ -17,6 +17,7 @@ input {
   width: 100%;
   font-weight: bold;
   font-size: 1.5rem;
+  transition: 0.3s;
 
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -24,20 +25,24 @@ input {
 
 input:hover {
   border: 1px solid black;
-  transition: 0.5s;
+  transition: 0.3s;
+}
+
+#name > input {
+  border-bottom: 1px solid black;
+  border-radius: 0;
+}
+
+#name > input:hover {
+  border-radius: 0.5rem;
 }
 
 #name {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid black;
+  transition: 0.3s;
   width: 100%;
-}
-
-#name:hover {
-  border-bottom: 1px solid transparent;
-  transition: 0.5s;
 }
 
 #contact {
