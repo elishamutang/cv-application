@@ -9,7 +9,6 @@
 input {
   appearance: none;
   background-color: transparent;
-  border: none;
   padding: 2% 0;
   border: 1px solid transparent;
   border-radius: 0.5rem;
@@ -43,6 +42,16 @@ input:hover {
   align-items: center;
   transition: 0.3s;
   width: 100%;
+}
+
+#name > h1 {
+  padding: 2% 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: 1px solid transparent;
+  border-bottom: 1px solid black;
+  width: 100%;
+  line-height: normal;
 }
 
 #contact {
