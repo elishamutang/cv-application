@@ -13,7 +13,7 @@ function MoveSectionComps({ handler }) {
   );
 }
 
-export default function MainContent() {
+export default function MainContent({ editMode }) {
   const initialOrder = [
     { id: 0, comp: Education },
     { id: 1, comp: Section },
@@ -93,7 +93,7 @@ export default function MainContent() {
         const { comp: Component } = item;
         return (
           <Fragment key={item.id}>
-            <Component moveSectionBtns={<MoveSectionComps handler={(e) => moveSection(e, item.id)} />} />
+            <Component moveSectionBtns={editMode && <MoveSectionComps handler={(e) => moveSection(e, item.id)} />} />
           </Fragment>
         );
       })}
