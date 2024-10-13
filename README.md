@@ -4,7 +4,11 @@ Building a CV application that comes with a template for users to enter their ed
 
 Quick, simple, easy.
 
-![demo](src/assets/mvp.png)
+## Mobile View
+
+<img align="center" width="100" height="100" src="./src/assets/mvp.png">
+
+<!-- ![demo](src/assets/mvp.png) -->
 
 ## Additional Features
 
