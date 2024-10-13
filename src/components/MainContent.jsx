@@ -93,7 +93,10 @@ export default function MainContent({ editMode }) {
         const { comp: Component } = item;
         return (
           <Fragment key={item.id}>
-            <Component moveSectionBtns={editMode && <MoveSectionComps handler={(e) => moveSection(e, item.id)} />} />
+            <Component
+              moveSectionBtns={<MoveSectionComps handler={(e) => moveSection(e, item.id)} />}
+              editMode={editMode}
+            />
           </Fragment>
         );
       })}

@@ -3,7 +3,7 @@ import ContentEditable from "react-contenteditable";
 import { AddMorePoints } from "./Buttons";
 import getLargestId from "../helperFuncs";
 
-function SkillsAndInterests({ moveSectionBtns }) {
+function SkillsAndInterests({ moveSectionBtns, editMode }) {
   const initialContent = {
     title: "Skills and Interests",
     info: [
@@ -102,7 +102,7 @@ function SkillsAndInterests({ moveSectionBtns }) {
       <div className="title">
         <input type="text" value={content.title} onChange={handleTitleChange} />
       </div>
-      <div className="move-section">{moveSectionBtns}</div>
+      {editMode && <div className="move-section">{moveSectionBtns}</div>}
       <div className="skills-interests-content">
         <ul>
           {content.info.map((item) => {

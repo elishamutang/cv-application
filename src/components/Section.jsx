@@ -32,7 +32,7 @@ function SectionHeader({ item, handleHeaderChange }) {
   );
 }
 
-function Section({ moveSectionBtns }) {
+function Section({ moveSectionBtns, editMode }) {
   // Initial values
   const initialSection = [
     {
@@ -367,7 +367,7 @@ function Section({ moveSectionBtns }) {
             <div className="title">
               <input type="text" value={sec.title} onChange={(e) => handleSectionNameChange(e, sec.id)} />
             </div>
-            {moveSectionBtns && (
+            {editMode && (
               <div className="move-section">
                 {/* Only render moveSectionBtns to first element in section array. */}
                 {sec.id === 0 && moveSectionBtns}

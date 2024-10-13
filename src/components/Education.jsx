@@ -13,7 +13,7 @@ const EducationContent = forwardRef(({ content, handleContentChange, onBlur }, r
 
 EducationContent.displayName = "EducationContent";
 
-function Education({ moveSectionBtns }) {
+function Education({ moveSectionBtns, editMode }) {
   // Initial values
   const initialEducation = [
     {
@@ -162,12 +162,10 @@ function Education({ moveSectionBtns }) {
     }
   }
 
-  // console.log(education);
-
   return (
     <div id="education">
       <div className="title">Education</div>
-      <div className="move-section">{moveSectionBtns}</div>
+      {editMode && <div className="move-section">{moveSectionBtns}</div>}
       {education.map((item) => (
         <div key={item.id} className="education-section">
           <ContentEditable html={item.institution} className="institution" onChange={(e) => handleChange(e, item.id)} />
