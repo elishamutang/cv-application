@@ -4,15 +4,15 @@ Building a CV application that comes with a template for users to enter their ed
 
 Quick, simple, easy.
 
-## Features
+![demo](image.png)
 
+## Additional Features
+
+1. Viewing / Editing modes.
+1. Reset to dummy values.
 1. Print to PDF.
-2. Email to yourself.
-3. Share to others.
-4. Move sections around.
 
 ### Disclaimer
 
-The data will remain as long as you visit the site using the same device that you entered your information.
-
+The data will remain as long as you visit the site using the _same device_ that you entered your information.
 Do not fret, I cannot access any of your information. It is stored in the local storage of your device.
