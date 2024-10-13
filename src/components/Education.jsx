@@ -3,10 +3,14 @@ import ContentEditable from "react-contenteditable";
 import { AddMorePoints, AddSectionContent, RemoveSectionContent } from "./Buttons";
 import getLargestId from "../helperFuncs";
 
-const EducationContent = forwardRef(({ content, handleContentChange, onBlur }, ref) => {
+const EducationContent = forwardRef(({ content, handleContentChange, onBlur, editMode }, ref) => {
   return (
     <li>
-      <ContentEditable html={content} onChange={handleContentChange} onBlur={onBlur} ref={ref} />
+      {editMode ? (
+        <ContentEditable html={content} onChange={handleContentChange} onBlur={onBlur} ref={ref} />
+      ) : (
+        <div>{content}</div>
+      )}
     </li>
   );
 });
@@ -168,14 +172,32 @@ function Education({ moveSectionBtns, editMode }) {
       {editMode && <div className="move-section">{moveSectionBtns}</div>}
       {education.map((item) => (
         <div key={item.id} className="education-section">
-          <ContentEditable html={item.institution} className="institution" onChange={(e) => handleChange(e, item.id)} />
-          <div className="location-graduationDate">
-            <ContentEditable html={item.location} className="location" onChange={(e) => handleChange(e, item.id)} />
+          {editMode ? (
             <ContentEditable
-              html={item.graduationDate}
-              className="graduationDate"
+              html={item.institution}
+              className="institution"
               onChange={(e) => handleChange(e, item.id)}
             />
+          ) : (
+            <div className="institution">{item.institution}</div>
+          )}
+
+          <div className="location-graduationDate">
+            {editMode ? (
+              <ContentEditable html={item.location} className="location" onChange={(e) => handleChange(e, item.id)} />
+            ) : (
+              <div className="location">{item.location}</div>
+            )}
+
+            {editMode ? (
+              <ContentEditable
+                html={item.graduationDate}
+                className="graduationDate"
+                onChange={(e) => handleChange(e, item.id)}
+              />
+            ) : (
+              <div className="graduationDate">{item.graduationDate}</div>
+            )}
           </div>
           <div className="content">
             <ul>
@@ -187,16 +209,17 @@ function Education({ moveSectionBtns, editMode }) {
                     handleContentChange={(e) => handleContentChange(e, content.id, item.id)}
                     onBlur={(e) => handleBlur(e, content.id, item.id)}
                     ref={(element) => content.value === "" && focusOnElement(element)}
+                    editMode={editMode}
                   />
                 );
               })}
-              <AddMorePoints buttonDisable={item.buttonDisable} onClick={() => addNewPoint(item.id)} />
+              {editMode && <AddMorePoints buttonDisable={item.buttonDisable} onClick={() => addNewPoint(item.id)} />}
             </ul>
           </div>
-          <RemoveSectionContent handleRemoveSectionContent={() => handleRemove(item.id)} />
+          {editMode && <RemoveSectionContent handleRemoveSectionContent={() => handleRemove(item.id)} />}
         </div>
       ))}
-      <AddSectionContent sectionName="education" handleAddMoreSectionContent={handleClick} />
+      {editMode && <AddSectionContent sectionName="education" handleAddMoreSectionContent={handleClick} />}
     </div>
   );
 }
