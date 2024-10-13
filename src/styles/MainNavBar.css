@@ -11,6 +11,11 @@
   padding: 0.3rem 0.3rem 0.3rem 0.3rem;
 }
 
+.mainNav.viewing {
+  grid-template-areas: "edit pdf";
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .mainNav > * {
   color: white;
   font-weight: bold;
