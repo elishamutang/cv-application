@@ -6,9 +6,9 @@ Quick, simple, easy.
 
 ## Mobile View
 
-<img align="center" src="./src/assets/mvp.png">
-
-<!-- ![demo](src/assets/mvp.png) -->
+<p align="center">
+    <img src="./src/assets/mvp.png">
+</p>
 
 ## Additional Features
 
