@@ -3,29 +3,54 @@ import ContentEditable from "react-contenteditable";
 import { AddSection, AddSectionContent, RemoveSection, RemoveSectionContent, AddMorePoints } from "./Buttons";
 import getLargestId from "../helperFuncs";
 
-const BulletPoint = forwardRef(({ content, handleContentChange, handleBlur }, ref) => {
+const BulletPoint = forwardRef(({ content, handleContentChange, handleBlur, editMode }, ref) => {
   return (
     <li>
-      <ContentEditable html={content.value} onChange={handleContentChange} onBlur={handleBlur} ref={ref} />
+      {editMode ? (
+        <ContentEditable html={content.value} onChange={handleContentChange} onBlur={handleBlur} ref={ref} />
+      ) : (
+        <div>{content.value}</div>
+      )}
     </li>
   );
 });
 
 BulletPoint.displayName = "BulletPoint";
 
-function SectionHeader({ item, handleHeaderChange }) {
+function SectionHeader({ item, handleHeaderChange, editMode }) {
   return (
     <>
       <div className="organisation-position">
-        <ContentEditable html={item.organisation} onChange={handleHeaderChange} className="organisation" />
-        <ContentEditable html={item.position} onChange={handleHeaderChange} className="position" />
+        {editMode ? (
+          <>
+            <ContentEditable html={item.organisation} onChange={handleHeaderChange} className="organisation" />
+            <ContentEditable html={item.position} onChange={handleHeaderChange} className="position" />
+          </>
+        ) : (
+          <>
+            <div className="organisation">{item.organisation}</div>
+            <div className="position">{item.position}</div>
+          </>
+        )}
       </div>
       <div className="location-duration">
-        <ContentEditable html={item.location} onChange={handleHeaderChange} className="location" />
+        {editMode ? (
+          <ContentEditable html={item.location} onChange={handleHeaderChange} className="location" />
+        ) : (
+          <div className="location">{item.location}</div>
+        )}
         <div className="duration">
-          <ContentEditable html={item.startDate} onChange={handleHeaderChange} className="startDate" />
-          -
-          <ContentEditable html={item.endDate} onChange={handleHeaderChange} className="endDate" />
+          {editMode ? (
+            <>
+              <ContentEditable html={item.startDate} onChange={handleHeaderChange} className="startDate" />
+              -
+              <ContentEditable html={item.endDate} onChange={handleHeaderChange} className="endDate" />
+            </>
+          ) : (
+            <>
+              <div className="startDate">{item.startDate}</div>-<div className="endDate">{item.endDate}</div>
+            </>
+          )}
         </div>
       </div>
     </>
@@ -379,7 +404,11 @@ function Section({ moveSectionBtns, editMode }) {
             {sec.content.map((content) => {
               return (
                 <div className="section" key={content.id}>
-                  <SectionHeader item={content} handleHeaderChange={(e) => handleHeaderChange(e, sec.id, content.id)} />
+                  <SectionHeader
+                    editMode={editMode}
+                    item={content}
+                    handleHeaderChange={(e) => handleHeaderChange(e, sec.id, content.id)}
+                  />
                   <div className="content">
                     <ul>
                       {/* Bullet-points */}
@@ -392,28 +421,35 @@ function Section({ moveSectionBtns, editMode }) {
                             bulletPointsArr={content.bulletPoints}
                             handleContentChange={(e) => handleContentChange(e, sec.id, content.id, point.id)}
                             handleBlur={(e) => handleBlur(e, sec.id, content.id, point.id)}
+                            editMode={editMode}
                           />
                         );
                       })}
-                      <AddMorePoints
-                        // On-click to add additional bullet point and disable button if no text input.
-                        onClick={() => addMoreBulletPoints(content.bulletPoints, content.id, sec.id)}
-                        buttonDisable={content.buttonDisable}
-                      />
+                      {editMode && (
+                        <AddMorePoints
+                          // On-click to add additional bullet point and disable button if no text input.
+                          onClick={() => addMoreBulletPoints(content.bulletPoints, content.id, sec.id)}
+                          buttonDisable={content.buttonDisable}
+                        />
+                      )}
                     </ul>
                   </div>
-                  <RemoveSectionContent
-                    handleRemoveSectionContent={() => handleRemoveSectionContent(sec.id, content.id)}
-                  />
+                  {editMode && (
+                    <RemoveSectionContent
+                      handleRemoveSectionContent={() => handleRemoveSectionContent(sec.id, content.id)}
+                    />
+                  )}
                 </div>
               );
             })}
-            <AddSectionContent
-              handleAddMoreSectionContent={() => handleAddMoreSectionContent(sec.id)}
-              sectionName={sec.title.toLowerCase()}
-            />
+            {editMode && (
+              <AddSectionContent
+                handleAddMoreSectionContent={() => handleAddMoreSectionContent(sec.id)}
+                sectionName={sec.title.toLowerCase()}
+              />
+            )}
             {/* Adds the 'addNewSection' button to the last element in the section array */}
-            {sec.id === getLargestId(section) && <AddSection onClick={handleAddNewSection} />}
+            {editMode && sec.id === getLargestId(section) && <AddSection onClick={handleAddNewSection} />}
           </div>
         );
       })}

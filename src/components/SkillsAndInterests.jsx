@@ -100,7 +100,7 @@ function SkillsAndInterests({ moveSectionBtns, editMode }) {
   return (
     <div id="skills-interests">
       <div className="title">
-        <input type="text" value={content.title} onChange={handleTitleChange} />
+        {editMode ? <input type="text" value={content.title} onChange={handleTitleChange} /> : `${content.title}`}
       </div>
       {editMode && <div className="move-section">{moveSectionBtns}</div>}
       <div className="skills-interests-content">
@@ -108,22 +108,31 @@ function SkillsAndInterests({ moveSectionBtns, editMode }) {
           {content.info.map((item) => {
             return (
               <li key={item.id} className="heading-info">
-                <ContentEditable
-                  className="heading"
-                  html={item.heading}
-                  onChange={(e) => handleInfoChange(e, item.id, "heading")}
-                  onBlur={() => handleBlur(item.id)}
-                />
-                <ContentEditable
-                  className="info"
-                  html={item.value}
-                  onChange={(e) => handleInfoChange(e, item.id, "value")}
-                  onBlur={() => handleBlur(item.id)}
-                />
+                {editMode ? (
+                  <>
+                    <ContentEditable
+                      className="heading"
+                      html={item.heading}
+                      onChange={(e) => handleInfoChange(e, item.id, "heading")}
+                      onBlur={() => handleBlur(item.id)}
+                    />
+                    <ContentEditable
+                      className="info"
+                      html={item.value}
+                      onChange={(e) => handleInfoChange(e, item.id, "value")}
+                      onBlur={() => handleBlur(item.id)}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <div className="heading">{item.heading}</div>
+                    <div className="info">{item.value}</div>
+                  </>
+                )}
               </li>
             );
           })}
-          <AddMorePoints buttonDisable={content.buttonDisable} onClick={addNewPoint} />
+          {editMode && <AddMorePoints buttonDisable={content.buttonDisable} onClick={addNewPoint} />}
         </ul>
       </div>
     </div>
