@@ -12,6 +12,7 @@ import "./styles/App.css";
 
 function App() {
   const [editMode, setMode] = useState(true);
+  const [reset, setReset] = useState(false);
   const [activeComps, setActiveComps] = useState([
     { id: 0, title: "mode", comp: Mode, isActive: false },
     { id: 1, title: "reset", comp: ResetLocalStorage, isActive: false },
@@ -35,6 +36,11 @@ function App() {
     setMode(!editMode);
   }
 
+  function resetLocalStorage() {
+    localStorage.clear();
+    setReset(!reset);
+  }
+
   return (
     <>
       <MainNav editMode={editMode}>
@@ -49,14 +55,16 @@ function App() {
                 updateActiveComps(item.id);
                 if (item.title === "mode") {
                   updateMode();
+                } else if (item.title === "reset") {
+                  resetLocalStorage();
                 }
               }}
             />
           );
         })}
       </MainNav>
-      <Header editMode={editMode} />
-      <MainContent editMode={editMode} />
+      {reset ? <Header key="reset-header" editMode={editMode} /> : <Header editMode={editMode} />}
+      {reset ? <MainContent key="reset-main" editMode={editMode} /> : <MainContent editMode={editMode} />}
     </>
   );
 }
