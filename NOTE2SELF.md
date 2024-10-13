@@ -16,6 +16,7 @@
    11. Print to PDF.
    12. Share to others.
    13. Email to yourself.
+   14. Make main nav stick.
 
 3. Bugs
    1. ~~Fix education-section sizing issue when removing bullet points.~~
