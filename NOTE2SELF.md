@@ -12,7 +12,7 @@
    7. Add reset to default / filler values button in nav bar of each section.
    8. Fix contact inputs.
    9. Add a hover effect on section when user hovers over Remove button.
-   10. Add Editing / Viewing mode.
+   10. ~~Add Editing / Viewing mode.~~
    11. Print to PDF.
    12. Share to others.
    13. Email to yourself.
