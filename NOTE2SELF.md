@@ -9,7 +9,7 @@
    4. ~~Delete field if user leaves as blank (in SkillsAndInterests component).~~
    5. ~~Add focus on new entry for SkillsAndInterests component (either add focus or just add placeholder).~~
    6. ~~Utilise local storage~~ (~~MainContent~~, ~~Education~~, ~~SkillsAndInterest~~, ~~Section~~).
-   7. Add reset to default / filler values button in nav bar of each section.
+   7. ~~Add reset to default / filler values button in nav bar of each section.~~
    8. Fix contact inputs.
    9. Add a hover effect on section when user hovers over Remove button.
    10. ~~Add Editing / Viewing mode.~~
