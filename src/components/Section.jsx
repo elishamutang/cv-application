@@ -367,12 +367,14 @@ function Section({ moveSectionBtns }) {
             <div className="title">
               <input type="text" value={sec.title} onChange={(e) => handleSectionNameChange(e, sec.id)} />
             </div>
-            <div className="move-section">
-              {/* Only render moveSectionBtns to first element in section array. */}
-              {sec.id === 0 && moveSectionBtns}
-              {/* Append the removeSection button to ADDITIONAL sections only. First section can never be deleted. */}
-              {sec.id !== 0 && <RemoveSection onClick={() => handleRemoveSection(sec.id)} />}
-            </div>
+            {moveSectionBtns && (
+              <div className="move-section">
+                {/* Only render moveSectionBtns to first element in section array. */}
+                {sec.id === 0 && moveSectionBtns}
+                {/* Append the removeSection button to ADDITIONAL sections only. First section can never be removed. */}
+                {sec.id !== 0 && <RemoveSection onClick={() => handleRemoveSection(sec.id)} />}
+              </div>
+            )}
             {/* Content under a specific section (e.g Experience will contain 2 experiences) */}
             {sec.content.map((content) => {
               return (
