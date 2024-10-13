@@ -6,7 +6,7 @@ Quick, simple, easy.
 
 ## Mobile View
 
-<img align="center" width="100" height="100" src="./src/assets/mvp.png">
+<img align="center" src="./src/assets/mvp.png">
 
 <!-- ![demo](src/assets/mvp.png) -->
 
