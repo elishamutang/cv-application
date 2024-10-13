@@ -13,9 +13,9 @@ import "./styles/App.css";
 function App() {
   const [editMode, setMode] = useState(true);
   const [activeComps, setActiveComps] = useState([
-    { id: 0, comp: Mode, isActive: false, isEditing: editMode },
-    { id: 1, comp: ResetLocalStorage, isActive: false },
-    { id: 2, comp: PrintToPDF, isActive: false },
+    { id: 0, title: "mode", comp: Mode, isActive: false },
+    { id: 1, title: "reset", comp: ResetLocalStorage, isActive: false },
+    { id: 2, title: "printToPDF", comp: PrintToPDF, isActive: false },
   ]);
 
   function updateActiveComps(itemId) {
@@ -37,17 +37,17 @@ function App() {
 
   return (
     <>
-      <MainNav>
+      <MainNav editMode={editMode}>
         {activeComps.map((item) => {
           const { comp: Component } = item;
           return (
             <Component
               key={item.id}
               active={item.isActive}
-              isEditing={editMode}
+              editMode={editMode}
               onClick={() => {
                 updateActiveComps(item.id);
-                if (item.isEditing !== undefined) {
+                if (item.title === "mode") {
                   updateMode();
                 }
               }}
