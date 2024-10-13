@@ -1,15 +1,17 @@
-export function ResetLocalStorage({ active, onClick }) {
-  return (
-    <button className={active ? "reset active" : "reset"} onClick={onClick}>
-      Reset
-    </button>
-  );
+export function ResetLocalStorage({ active, onClick, editMode }) {
+  if (editMode) {
+    return (
+      <button className={active ? "reset active" : "reset"} onClick={onClick}>
+        Reset
+      </button>
+    );
+  }
 }
 
-export function Mode({ active, onClick, isEditing }) {
+export function Mode({ active, onClick, editMode }) {
   return (
     <button className={active ? "Mode active" : "Mode"} onClick={onClick}>
-      {isEditing ? "Editing" : "Viewing"}
+      {editMode ? "Editing" : "Viewing"}
     </button>
   );
 }
@@ -22,6 +24,6 @@ export function PrintToPDF({ active, onClick }) {
   );
 }
 
-export default function MainNav({ children }) {
-  return <div className="mainNav">{children}</div>;
+export default function MainNav({ children, editMode }) {
+  return <div className={editMode ? "mainNav" : "mainNav viewing"}>{children}</div>;
 }
