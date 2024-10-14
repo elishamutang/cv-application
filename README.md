@@ -9,7 +9,7 @@ Quick, simple, easy.
 ### Editing
 
 <p align="center">
-    <img src="./src/assets/mvp.png">
+    <img src="./src/assets/mvp1.png">
 </p>
 
 ### Viewing
