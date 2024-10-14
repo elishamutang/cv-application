@@ -10,13 +10,13 @@
    5. ~~Add focus on new entry for SkillsAndInterests component (either add focus or just add placeholder).~~
    6. ~~Utilise local storage~~ (~~MainContent~~, ~~Education~~, ~~SkillsAndInterest~~, ~~Section~~).
    7. ~~Add reset to default / filler values button in nav bar of each section.~~
-   8. Fix contact inputs.
+   8. ~~Fix contact inputs.~~
    9. Add a hover effect on section when user hovers over Remove button.
    10. ~~Add Editing / Viewing mode.~~
    11. Print to PDF.
    12. Share to others.
    13. Email to yourself.
-   14. Make main nav stick.
+   14. ~~Make main nav stick.~~
 
 3. Bugs
    1. ~~Fix education-section sizing issue when removing bullet points.~~
