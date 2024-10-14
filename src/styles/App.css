@@ -76,12 +76,15 @@ input:hover {
 }
 
 #contact > input,
-#contact > input::placeholder,
 #contact > p {
   color: hsl(0, 0%, 0%);
   font-weight: normal;
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   text-wrap: wrap;
+}
+
+#contact > p {
+  padding: 0;
 }
 
 #contact > input:not(:active) {
