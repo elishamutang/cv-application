@@ -4,8 +4,11 @@
   grid-template-areas: "edit reset pdf";
   gap: 1rem;
   margin-bottom: 2rem;
+  position: sticky;
+  top: 1rem;
+  box-shadow: 1px 1px 3px 0px black;
 
-  border: 1px solid lightgray;
+  border: 1px solid transparent;
   border-radius: 1.3rem;
   background-color: hsl(0, 0%, 30%);
   padding: 0.3rem 0.3rem 0.3rem 0.3rem;
