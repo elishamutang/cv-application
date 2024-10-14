@@ -6,8 +6,16 @@ Quick, simple, easy.
 
 ## Mobile View
 
+### Editing
+
 <p align="center">
     <img src="./src/assets/mvp.png">
+</p>
+
+### Viewing
+
+<p align="center">
+    <img src="./src/assets/mvp2.png">
 </p>
 
 ## Additional Features
