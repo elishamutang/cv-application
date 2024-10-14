@@ -14,7 +14,7 @@ function App() {
   const [editMode, setMode] = useState(true);
   const [reset, setReset] = useState(false);
   const [activeComps, setActiveComps] = useState([
-    { id: 0, title: "mode", comp: Mode, isActive: false },
+    { id: 0, title: "mode", comp: Mode, isActive: true },
     { id: 1, title: "reset", comp: ResetLocalStorage, isActive: false },
     { id: 2, title: "printToPDF", comp: PrintToPDF, isActive: false },
   ]);
