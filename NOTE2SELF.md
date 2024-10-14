@@ -17,6 +17,7 @@
    12. Share to others.
    13. Email to yourself.
    14. ~~Make main nav stick.~~
+   15. Make it responsive.
 
 3. Bugs
    1. ~~Fix education-section sizing issue when removing bullet points.~~
