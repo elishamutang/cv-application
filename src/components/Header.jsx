@@ -7,10 +7,8 @@ function Header({ editMode }) {
   });
 
   const initialContactDetails = [
-    { id: 0, field: "Street Address" },
-    { id: 1, field: "City, State Zip" },
-    { id: 2, field: "youremail@contact.com" },
-    { id: 3, field: "Phone Number" },
+    { id: 0, title: "address", field: "Street Address, City, State Zip" },
+    { id: 1, title: "userContact", field: "(+61) 000 000 E: youremail@contact.com" },
   ];
 
   const [contactDetails, setContactDetails] = useState(() => {
@@ -27,16 +25,18 @@ function Header({ editMode }) {
     setFullName(e.target.value);
   }
 
-  function handleContactChange(e) {
-    setContactDetails(
-      contactDetails.map((item) => {
-        if (item.id == e.target.id) {
+  function handleContactChange(e, itemId) {
+    setContactDetails((prevContactDetails) => {
+      const newContactDetails = prevContactDetails.map((item) => {
+        if (item.id === itemId) {
           return { ...item, field: e.target.value };
         } else {
           return item;
         }
-      })
-    );
+      });
+
+      return newContactDetails;
+    });
   }
 
   return (
@@ -47,9 +47,18 @@ function Header({ editMode }) {
       <div id="contact">
         {editMode
           ? contactDetails.map((item) => (
-              <input key={item.id} placeholder={item.field} onChange={handleContactChange} />
+              <input
+                id={item.title}
+                key={item.id}
+                value={item.field}
+                onChange={(e) => handleContactChange(e, item.id)}
+              />
             ))
-          : contactDetails.map((item) => <p key={item.id}>{item.field}</p>)}
+          : contactDetails.map((item) => (
+              <p id={item.title} key={item.id}>
+                {item.field}
+              </p>
+            ))}
       </div>
     </div>
   );
