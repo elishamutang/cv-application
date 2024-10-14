@@ -1,8 +1,8 @@
 # CV Application
 
-Building a CV application that comes with a template for users to enter their education, experience, projects etc.
+Currently building a CV application that presents the user with a simple CV template for users to enter their name, contact details, education, experience, projects, and any skills and interests they may have.
 
-Quick, simple, easy.
+Main motivation to start this project was to learn a new technology, specifically the React library.
 
 ## Mobile View
 
