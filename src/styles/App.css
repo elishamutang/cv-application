@@ -30,8 +30,8 @@ input:hover {
 }
 
 #name > input {
-  border-bottom: 1px solid black;
   border-radius: 0;
+  font-size: 2.5rem;
 }
 
 #name > input:hover {
@@ -46,24 +46,46 @@ input:hover {
   width: 100%;
 }
 
+#name > input:not(:active) {
+  border: 1px solid transparent;
+}
+
 #name > h1 {
   border: 1px solid transparent;
-  border-bottom: 1px solid black;
   border-radius: 0;
   line-height: normal;
+  font-size: 2.5rem;
 }
 
 #contact {
-  margin-top: 0.2rem;
-  display: flex;
+  margin: 0.2rem 0 2rem 0;
+  padding-bottom: 2%;
+  display: grid;
+  grid-template-areas:
+    "address"
+    "userContact";
+  border-bottom: 1px solid black;
+}
+
+#address {
+  grid-area: address;
+}
+
+#userContact {
+  grid-area: userContact;
 }
 
 #contact > input,
+#contact > input::placeholder,
 #contact > p {
-  color: hsl(0, 0%, 50%);
+  color: hsl(0, 0%, 0%);
   font-weight: normal;
   font-size: 0.6rem;
   text-wrap: wrap;
+}
+
+#contact > input:not(:active) {
+  border: 1px solid transparent;
 }
 
 .education-section,
@@ -99,7 +121,6 @@ input:hover {
   grid-template-areas: "moveSectionDown moveSectionUp title removeBtn";
   grid-template-columns: auto auto 1fr auto;
   place-items: center;
-  /* border: 1px solid red; */
 }
 
 .title > input {
