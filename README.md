@@ -12,7 +12,7 @@ Main motivation to start this project was to learn a new technology, specificall
 
 ## Mobile View
 
-[Editing](./src/assets/mvp1.png) [Viewing](./src/assets/mvp2.png)
+![Editing](./src/assets/mvp1.png) ![Viewing](./src/assets/mvp2.png)
 
 ## Additional Features
 
