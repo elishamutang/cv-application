@@ -4,17 +4,23 @@ Currently building a CV application that presents the user with a simple CV temp
 
 Main motivation to start this project was to learn a new technology, specifically the React library.
 
-## Mobile View
-
-### Editing
+## Desktop
 
 <p align="center">
+    <img src="./src/assets/desktop.png">
+</p>
+
+## Mobile View
+
+Editing
+
+<p align="left">
     <img src="./src/assets/mvp1.png">
 </p>
 
-### Viewing
+Viewing
 
-<p align="center">
+<p align="right">
     <img src="./src/assets/mvp2.png">
 </p>
 
