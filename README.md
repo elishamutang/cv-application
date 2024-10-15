@@ -13,10 +13,7 @@ Main motivation to start this project was to learn a new technology, specificall
 ## Mobile View
 
 <p align="center">
-    <p>Editing</p>
-    <img src="./src/assets/mvp1.png">
-    <p>Viewing</p>
-    <img src="./src/assets/mvp2.png">
+    <p>Editing</p><img src="./src/assets/mvp1.png"><p>Viewing</p><img src="./src/assets/mvp2.png">
 </p>
 
 ## Additional Features
