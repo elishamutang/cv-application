@@ -3,7 +3,8 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-areas: "edit reset pdf";
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin: 0 auto;
+  /* margin-bottom: 2rem; */
   position: sticky;
   top: 1rem;
   box-shadow: 1px 1px 3px 0px black;
