@@ -38,6 +38,8 @@ function App() {
 
   function resetLocalStorage() {
     localStorage.clear();
+
+    alert("Info sucessfully reset.");
     setReset(!reset);
   }
 
