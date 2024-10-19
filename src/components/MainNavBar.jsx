@@ -1,7 +1,7 @@
-export function ResetLocalStorage({ active, onClick, editMode }) {
+export function ResetLocalStorage({ onClick, editMode }) {
   if (editMode) {
     return (
-      <button className={active ? "reset active" : "reset"} onClick={onClick}>
+      <button className="reset" onClick={onClick}>
         Reset
       </button>
     );
@@ -10,7 +10,7 @@ export function ResetLocalStorage({ active, onClick, editMode }) {
 
 export function Mode({ active, onClick, editMode }) {
   return (
-    <button className={active ? "Mode active" : "Mode"} onClick={onClick}>
+    <button className={active ? "mode active" : "mode"} onClick={onClick}>
       {editMode ? "Editing" : "Viewing"}
     </button>
   );
