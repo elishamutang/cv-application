@@ -1,10 +1,9 @@
 .mainNav {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-areas: "edit reset pdf";
+  grid-template-areas: "mode reset pdf";
   gap: 1rem;
   margin: 0 auto;
-  /* margin-bottom: 2rem; */
   position: sticky;
   top: 1rem;
   box-shadow: 1px 1px 3px 0px black;
@@ -16,7 +15,7 @@
 }
 
 .mainNav.viewing {
-  grid-template-areas: "edit pdf";
+  grid-template-areas: "mode pdf";
   grid-template-columns: repeat(2, 1fr);
 }
 
@@ -47,8 +46,8 @@
   grid-area: reset;
 }
 
-.editDoc {
-  grid-area: edit;
+.mode {
+  grid-area: mode;
 }
 
 .printToPDF {
