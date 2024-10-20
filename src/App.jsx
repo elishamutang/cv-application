@@ -2,10 +2,12 @@ import { useState } from "react";
 import Header from "./components/Header";
 import MainContent from "./components/MainContent";
 import MainNav, { ResetLocalStorage, Mode, PrintToPDF } from "./components/MainNavBtns";
+import Footer from "./components/Footer";
 import "./styles/MainNavBar.css";
 import "./styles/Section.css";
 import "./styles/Education.css";
 import "./styles/SkillsAndInterests.css";
+import "./styles/Footer.css";
 import "./styles/App.css";
 
 // Control main nav functionality from here.
@@ -69,6 +71,7 @@ function App() {
         {reset ? <Header key="reset-header" editMode={editMode} /> : <Header editMode={editMode} />}
         {reset ? <MainContent key="reset-main" editMode={editMode} /> : <MainContent editMode={editMode} />}
       </div>
+      <Footer />
     </>
   );
 }
