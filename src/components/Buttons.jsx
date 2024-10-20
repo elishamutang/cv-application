@@ -1,7 +1,15 @@
 // Remove experience under a specific section.
 function RemoveSectionContent({ handleRemoveSectionContent }) {
+  function hoverIn(e) {
+    e.target.parentNode.classList.add("hover");
+  }
+
+  function hoverOut(e) {
+    e.target.parentNode.classList.remove("hover");
+  }
+
   return (
-    <button onClick={handleRemoveSectionContent} className="removeBtn">
+    <button onClick={handleRemoveSectionContent} onMouseEnter={hoverIn} onMouseLeave={hoverOut} className="removeBtn">
       Remove
     </button>
   );
