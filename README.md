@@ -1,6 +1,6 @@
 # CV Application
 
-Currently building a CV application that presents the user with a simple CV template for users to enter their name, contact details, education, experience, projects, and any skills and interests they may have.
+Currently building a CV application that presents the user with a simple CV template (courtesy of [Harvard College](https://careerservices.fas.harvard.edu/resources/bullet-point-resume-template/)) for users to quickly create a CV.
 
 Main motivation to start this project was to learn a new technology, specifically the React library.
 
