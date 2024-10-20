@@ -203,6 +203,11 @@ input:hover {
 }
 
 @media screen and (min-width: 800px) {
+  body {
+    background-color: hsl(0, 0%, 90%);
+    transition: 0.3s;
+  }
+
   .main {
     width: 21cm;
     margin: 2rem 0;
