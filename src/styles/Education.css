@@ -4,6 +4,9 @@
     "institution . locationGraduationDate"
     "content content content"
     "remove remove remove";
+  border: 1px solid transparent;
+  transition: 0.3s;
+  border-radius: 1rem;
 }
 
 .institution {
@@ -45,4 +48,10 @@
 
 .education-section ~ .education-section {
   margin-top: 1rem;
+}
+
+.education-section.hover {
+  border: 1px solid red;
+  transition: 0.3s;
+  border-radius: 1rem;
 }

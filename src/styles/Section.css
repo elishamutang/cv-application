@@ -5,8 +5,10 @@
     "content content content"
     "remove remove remove";
 
-  /* border: 1px solid red; */
+  border: 1px solid transparent;
+  border-radius: 1rem;
   font-size: 1rem;
+  transition: 0.3s;
 }
 
 .title,
@@ -122,4 +124,10 @@
 
 .section ~ .section {
   margin-top: 1rem;
+}
+
+.section.hover {
+  border: 1px solid red;
+  transition: 0.3s;
+  border-radius: 1rem;
 }
