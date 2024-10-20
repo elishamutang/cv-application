@@ -7,7 +7,7 @@ Main motivation to start this project was to learn a new technology, specificall
 ## Desktop
 
 <p align="center">
-    <img src="./src/assets/desktopfull.png">
+    <img src="./src/assets/desktopfullsize.png">
 </p>
 
 ## Mobile View
