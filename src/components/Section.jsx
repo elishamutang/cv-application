@@ -382,8 +382,6 @@ function Section({ moveSectionBtns, editMode }) {
     }
   }
 
-  // console.log(section);
-
   return (
     <>
       {section.map((sec) => {
