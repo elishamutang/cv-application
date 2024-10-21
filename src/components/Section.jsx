@@ -388,7 +388,11 @@ function Section({ moveSectionBtns, editMode }) {
         return (
           <div className="section-container" id={sec.title.toLowerCase()} key={sec.id}>
             <div className="title">
-              <input type="text" value={sec.title} onChange={(e) => handleSectionNameChange(e, sec.id)} />
+              {editMode ? (
+                <input type="text" value={sec.title} onChange={(e) => handleSectionNameChange(e, sec.id)} />
+              ) : (
+                `${sec.title}`
+              )}
             </div>
             {editMode && (
               <div className="move-section">
