@@ -1,5 +1,6 @@
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import PDFTemplate from "./PDFTemplate";
+import { Link } from "react-router-dom";
 
 export function ResetLocalStorage({ onClick, editMode }) {
   if (editMode) {
@@ -23,11 +24,14 @@ export function PrintToPDF({ onClick }) {
   return (
     <button className="printToPDF" onClick={onClick}>
       {/* Consider using react router to direct user to a separate tab to view PDF */}
-      <PDFDownloadLink document={<PDFTemplate />} fileName="test.pdf" style={{ color: "white" }}>
+
+      <Link to={`ViewPDF`}>Print to PDF</Link>
+
+      {/* <PDFDownloadLink document={<PDFTemplate />} fileName="test.pdf" style={{ color: "white" }}>
         {({ blob, url, loading, error }) => {
           return loading ? "Loading" : "Print to PDF";
         }}
-      </PDFDownloadLink>
+      </PDFDownloadLink> */}
     </button>
   );
 }
