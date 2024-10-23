@@ -14,11 +14,9 @@
    9. ~~Add a hover effect on section when user hovers over Remove button.~~
    10. ~~Add Editing / Viewing mode.~~
    11. Print to PDF.
-   12. Share to others.
-   13. Email to yourself.
-   14. ~~Make main nav stick.~~
-   15. ~~Make it responsive.~~
-   16. ~~Move the main nav bar outside of the A4 document.~~
+   12. ~~Make main nav stick.~~
+   13. ~~Make it responsive.~~
+   14. ~~Move the main nav bar outside of the A4 document.~~
 
 3. Bugs
    1. ~~Fix education-section sizing issue when removing bullet points.~~
