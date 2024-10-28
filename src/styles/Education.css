@@ -7,6 +7,7 @@
   border: 1px solid transparent;
   transition: 0.3s;
   border-radius: 1rem;
+  padding: 0.5rem;
 }
 
 .institution {
@@ -46,6 +47,8 @@
   outline: none;
 }
 
+/* The '~' symbol is a subsequent-sibling combinator. It separates two selectors and matches all instances of the second element
+that follow the first element (not necessarily immediately) and share the same parent element. */
 .education-section ~ .education-section {
   margin-top: 1rem;
 }
