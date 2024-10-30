@@ -8,7 +8,7 @@ export default function PDFTemplate() {
       flexDirection: "column",
       alignItems: "center",
       backgroundColor: "white",
-      padding: "16px",
+      padding: "32px",
       fontFamily: "Helvetica",
       display: "flex",
     },
@@ -73,6 +73,13 @@ export default function PDFTemplate() {
       fontSize: "12px",
       lineHeight: 1.5,
     },
+    heading: {
+      width: "100%",
+      maxWidth: "80px",
+      fontWeight: "bold",
+      fontFamily: "Helvetica-Bold",
+      textAlign: "left",
+    },
   });
 
   return (
@@ -114,12 +121,14 @@ export default function PDFTemplate() {
         <Text style={[styles.name, styles.sectionHeader]}>Experience</Text>
         {JSON.parse(localStorage.getItem("sections")).map((section) => {
           return (
-            <View key={section.id} style={styles.section}>
+            // Main container
+            <View key={section.id}>
               {section.content.map((item) => {
                 return (
-                  // Second level
-                  <>
-                    <View key={item.id} style={[styles.secondLevel, { marginBottom: "3px" }]}>
+                  // Section container
+                  <View key={item.id} wrap={false} style={styles.section}>
+                    {/* Second level */}
+                    <View style={[styles.secondLevel, { marginBottom: "3px" }]}>
                       <View>
                         <Text style={styles.organisation}>{item.organisation}</Text>
                         <Text style={styles.position}>{item.position}</Text>
@@ -141,7 +150,7 @@ export default function PDFTemplate() {
                         );
                       })}
                     </View>
-                  </>
+                  </View>
                 );
               })}
             </View>
@@ -154,17 +163,7 @@ export default function PDFTemplate() {
           {JSON.parse(localStorage.getItem("skillsAndInterests")).info.map((item) => {
             return (
               <View key={item.id} style={styles.skillsAndInterests}>
-                <Text
-                  style={{
-                    width: "100%",
-                    maxWidth: "80px",
-                    fontWeight: "bold",
-                    fontFamily: "Helvetica-Bold",
-                    textAlign: "left",
-                  }}
-                >
-                  {item.heading}
-                </Text>
+                <Text style={styles.heading}>{item.heading}</Text>
                 <Text style={{ width: "100%", textAlign: "left" }}>{item.value}</Text>
               </View>
             );
