@@ -51,6 +51,7 @@ input:hover {
   align-items: center;
   transition: 0.3s;
   width: 100%;
+  color: black;
 }
 
 #name > input:not(:active) {
@@ -135,6 +136,7 @@ input:hover {
 
 .title > input {
   grid-area: title;
+  color: black;
 }
 
 #education > .title {
