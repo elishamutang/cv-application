@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import { isMobile } from "react-device-detect";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import PDFTemplate from "./PDFTemplate";
 
 export function ResetLocalStorage({ onClick, editMode }) {
   if (editMode) {
@@ -19,9 +22,21 @@ export function Mode({ active, onClick, editMode }) {
 }
 
 export function PrintToPDF({ onClick }) {
+  if (isMobile) {
+    return (
+      <button>
+        <PDFDownloadLink document={<PDFTemplate />} fileName="yourcv.pdf" style={{ color: "white" }}>
+          {({ blob, url, loading, error }) => {
+            return loading ? "Loading.." : "Print PDF";
+          }}
+        </PDFDownloadLink>
+      </button>
+    );
+  }
+
   return (
     <button className="printToPDF" onClick={onClick}>
-      {/* Use react router to direct user to a separate tab to view PDF */}
+      {/*  Use react router to direct user to a separate tab to view PDF */}
       <Link to="../ViewPDF" target="_blank">
         Print PDF
       </Link>
