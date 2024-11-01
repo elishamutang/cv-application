@@ -22,7 +22,7 @@ export function PrintToPDF({ onClick }) {
   return (
     <button className="printToPDF" onClick={onClick}>
       {/* Use react router to direct user to a separate tab to view PDF */}
-      <Link to={"ViewPDF"} target="_blank">
+      <Link to="../ViewPDF" target="_blank">
         Print PDF
       </Link>
     </button>
