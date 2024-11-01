@@ -39,6 +39,7 @@ input:hover {
 #name > input {
   border-radius: 0;
   font-size: 2.5rem;
+  color: black;
 }
 
 #name > input:hover {
@@ -51,7 +52,6 @@ input:hover {
   align-items: center;
   transition: 0.3s;
   width: 100%;
-  color: black;
 }
 
 #name > input:not(:active) {
