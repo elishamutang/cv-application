@@ -93,13 +93,14 @@ export default function PDFTemplate() {
         </View>
 
         {/* Sections will be printed out based on the order that was set in Editing mode. */}
-        {JSON.parse(localStorage.getItem("order")).map((item) => {
+        {JSON.parse(localStorage.getItem("order")).map((item, idx) => {
           if (item.title === "Education") {
             return (
               // Education section
               <>
                 {/* Education header */}
-                <Text style={[styles.name, styles.sectionHeader, { marginTop: 8 }]}>Education</Text>
+                <Text style={[styles.name, styles.sectionHeader, { marginTop: idx === 0 && 8 }]}>Education</Text>
+
                 {/* Education content */}
                 {JSON.parse(localStorage.getItem("education")).map((item) => {
                   return (
@@ -130,7 +131,9 @@ export default function PDFTemplate() {
             return (
               <>
                 {/* Header */}
-                <Text style={[styles.name, styles.sectionHeader]}>Skills And Interests</Text>
+                <Text style={[styles.name, styles.sectionHeader, { marginTop: idx === 0 && 8 }]}>
+                  Skills And Interests
+                </Text>
 
                 {/* Content */}
                 <View style={[styles.section]}>
@@ -150,7 +153,7 @@ export default function PDFTemplate() {
             return (
               <>
                 {/* Section Header */}
-                <Text style={[styles.name, styles.sectionHeader]}>Experience</Text>
+                <Text style={[styles.name, styles.sectionHeader, { marginTop: idx === 0 && 8 }]}>Experience</Text>
 
                 {/* Section Content */}
                 {JSON.parse(localStorage.getItem("sections")).map((section) => {
