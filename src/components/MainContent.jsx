@@ -22,6 +22,7 @@ export default function MainContent({ editMode }) {
 
   // Create an initial state array to store initial components.
   // If a local copy of order exists, use that as initial state.
+  // Else use default arrangement defined in initialOrder array and save it in local storage.
   const [order, setOrder] = useState(() => {
     const checkLocal = localStorage.getItem("order");
 
@@ -40,6 +41,7 @@ export default function MainContent({ editMode }) {
 
       return localOrder;
     } else {
+      localStorage.setItem("order", JSON.stringify(initialOrder));
       return initialOrder;
     }
   });
