@@ -16,10 +16,10 @@ function RemoveSectionContent({ handleRemoveSectionContent }) {
 }
 
 // Button to add additional experience under a specific section.
-function AddSectionContent({ sectionName, handleAddMoreSectionContent }) {
+function AddSectionContent({ handleAddMoreSectionContent }) {
   return (
     <button onClick={handleAddMoreSectionContent} className="addMore">
-      Add {sectionName}
+      Add experience
     </button>
   );
 }
