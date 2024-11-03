@@ -25,6 +25,18 @@
   max-width: 5rem;
 }
 
+@media screen and (min-width: 500px) {
+  .heading {
+    max-width: 6rem;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .heading {
+    max-width: 8rem;
+  }
+}
+
 .info {
   grid-area: content;
 }
