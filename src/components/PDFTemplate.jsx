@@ -75,7 +75,7 @@ export default function PDFTemplate() {
     },
     heading: {
       width: "100%",
-      maxWidth: "80px",
+      maxWidth: "100px",
       fontWeight: "bold",
       fontFamily: "Helvetica-Bold",
       textAlign: "left",
@@ -97,14 +97,14 @@ export default function PDFTemplate() {
           if (item.title === "Education") {
             return (
               // Education section
-              <>
+              <View key={item.title} style={styles.section}>
                 {/* Education header */}
-                <Text style={[styles.name, styles.sectionHeader, { marginTop: idx === 0 && 8 }]}>Education</Text>
+                <Text style={[styles.name, styles.sectionHeader, { marginTop: idx === 0 && 8 }]}>{item.heading}</Text>
 
                 {/* Education content */}
                 {JSON.parse(localStorage.getItem("education")).map((item) => {
                   return (
-                    <View key={item.id} style={styles.section}>
+                    <View key={item.id}>
                       <View style={styles.secondLevel}>
                         <Text style={styles.organisation}>{item.institution}</Text>
                         <View>
@@ -124,19 +124,17 @@ export default function PDFTemplate() {
                     </View>
                   );
                 })}
-              </>
+              </View>
             );
-          } else if (item.title === "Skills And Interests") {
+          } else if (item.title === "Skills and Interests") {
             // Skills And Interests
             return (
-              <>
+              <View key={item.title} style={styles.section} wrap={false}>
                 {/* Header */}
-                <Text style={[styles.name, styles.sectionHeader, { marginTop: idx === 0 && 8 }]}>
-                  Skills And Interests
-                </Text>
+                <Text style={[styles.name, styles.sectionHeader, { marginTop: idx === 0 && 8 }]}>{item.heading}</Text>
 
                 {/* Content */}
-                <View style={[styles.section]}>
+                <View wrap={false}>
                   {JSON.parse(localStorage.getItem("skillsAndInterests")).info.map((item) => {
                     return (
                       <View key={item.id} style={styles.skillsAndInterests}>
@@ -146,14 +144,14 @@ export default function PDFTemplate() {
                     );
                   })}
                 </View>
-              </>
+              </View>
             );
           } else {
             // Sections
             return (
-              <>
+              <View key={item.title} style={styles.section}>
                 {/* Section Header */}
-                <Text style={[styles.name, styles.sectionHeader, { marginTop: idx === 0 && 8 }]}>Experience</Text>
+                <Text style={[styles.name, styles.sectionHeader, { marginTop: idx === 0 && 8 }]}>{item.heading}</Text>
 
                 {/* Section Content */}
                 {JSON.parse(localStorage.getItem("sections")).map((section) => {
@@ -163,7 +161,7 @@ export default function PDFTemplate() {
                       {section.content.map((item) => {
                         return (
                           // Section container
-                          <View key={item.id} wrap={false} style={styles.section}>
+                          <View key={item.id} wrap={false}>
                             {/* Second level */}
                             <View style={[styles.secondLevel, { marginBottom: "3px" }]}>
                               <View>
@@ -193,7 +191,7 @@ export default function PDFTemplate() {
                     </View>
                   );
                 })}
-              </>
+              </View>
             );
           }
         })}
