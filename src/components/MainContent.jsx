@@ -15,9 +15,9 @@ function MoveSectionComps({ handler }) {
 
 export default function MainContent({ editMode }) {
   const initialOrder = [
-    { id: 0, comp: Education },
-    { id: 1, comp: Section },
-    { id: 2, comp: SkillsAndInterests },
+    { id: 0, comp: Education, title: "Education" },
+    { id: 1, comp: Section, title: "Section" },
+    { id: 2, comp: SkillsAndInterests, title: "Skills And Interests" },
   ];
 
   // Create an initial state array to store initial components.
