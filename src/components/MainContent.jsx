@@ -19,8 +19,8 @@ export default function MainContent({ editMode }) {
     {
       id: 1,
       comp: Section,
-      title: "Section",
-      heading: "Section",
+      title: "Experience",
+      heading: "Experience",
     },
     {
       id: 2,
