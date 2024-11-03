@@ -29,6 +29,8 @@
   background-color: hsl(0, 0%, 40%);
   padding: 0.5rem;
   outline: none;
+  display: flex;
+  justify-content: center;
 }
 
 .mainNav > button:hover {
@@ -56,6 +58,7 @@
 
 .printToPDF > a {
   color: white;
+  width: 100%;
 }
 
 .mainNav > *:not(.active) {
