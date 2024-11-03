@@ -444,12 +444,7 @@ function Section({ moveSectionBtns, editMode }) {
                 </div>
               );
             })}
-            {editMode && (
-              <AddSectionContent
-                handleAddMoreSectionContent={() => handleAddMoreSectionContent(sec.id)}
-                sectionName={sec.title.toLowerCase()}
-              />
-            )}
+            {editMode && <AddSectionContent handleAddMoreSectionContent={() => handleAddMoreSectionContent(sec.id)} />}
             {/* Adds the 'addNewSection' button to the last element in the section array */}
             {editMode && sec.id === getLargestId(section) && <AddSection onClick={handleAddNewSection} />}
           </div>
