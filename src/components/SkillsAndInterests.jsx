@@ -39,6 +39,17 @@ function SkillsAndInterests({ moveSectionBtns, editMode }) {
 
   useEffect(() => {
     localStorage.setItem("skillsAndInterests", JSON.stringify(content));
+
+    // Update title in order array to reflect in PDF.
+    const updatedHeading = JSON.parse(localStorage.getItem("order")).map((item) => {
+      if (item.title === initialContent.title) {
+        return { ...item, heading: content.title };
+      } else {
+        return { ...item };
+      }
+    });
+
+    localStorage.setItem("order", JSON.stringify(updatedHeading));
   }, [content]);
 
   function handleTitleChange(e) {
