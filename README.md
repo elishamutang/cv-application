@@ -1,8 +1,8 @@
 # CV Application
 
-Currently building a CV application that presents the user with a simple CV template (courtesy of [Harvard College](https://careerservices.fas.harvard.edu/resources/bullet-point-resume-template/)) for users to quickly create a CV.
+Developed a CV application that presents the user with a simple CV template (courtesy of [Harvard College](https://careerservices.fas.harvard.edu/resources/bullet-point-resume-template/)) to create a CV in minutes!
 
-Main motivation to start this project was to learn a new technology, specifically the React library.
+Main motivation to start this project was to learn React and state management using useState, and also other React Hooks such as useEffect and useRef.
 
 ## Desktop
 
