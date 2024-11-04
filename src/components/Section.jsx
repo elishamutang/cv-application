@@ -63,6 +63,7 @@ function Section({ moveSectionBtns, editMode }) {
     {
       id: 0,
       title: "Experience",
+      heading: "Experience",
       content: [
         {
           id: 0,
@@ -167,14 +168,42 @@ function Section({ moveSectionBtns, editMode }) {
   });
 
   useEffect(() => {
+    // Update sections
     localStorage.setItem("sections", JSON.stringify(section));
+
+    // Update heading in order obj.
+    const [updatedHeading] = JSON.parse(localStorage.getItem("order"))
+      .map((item) => {
+        const newHeadings = section
+          .map((sec) => {
+            if (sec.title === item.title) {
+              return { id: sec.id, value: sec.heading };
+            }
+          })
+          .filter((arr) => {
+            return arr !== undefined;
+          });
+
+        return newHeadings;
+      })
+      .filter((arr) => arr.length !== 0);
+
+    const newOrder = JSON.parse(localStorage.getItem("order"));
+
+    newOrder.forEach((item) => {
+      if (item.title === "Experience") {
+        item.heading = updatedHeading;
+      }
+    });
+
+    localStorage.setItem("order", JSON.stringify(newOrder));
   }, [section]);
 
   function handleSectionNameChange(e, itemId) {
     setSection(
       section.map((name) => {
         if (name.id === itemId) {
-          return { ...name, title: e.target.value === "" ? name.title : e.target.value };
+          return { ...name, heading: e.target.value === "" ? name.heading : e.target.value };
         } else {
           return name;
         }
@@ -386,12 +415,12 @@ function Section({ moveSectionBtns, editMode }) {
     <>
       {section.map((sec) => {
         return (
-          <div className="section-container" id={sec.title.toLowerCase()} key={sec.id}>
+          <div className="section-container" id={sec.heading.toLowerCase()} key={sec.id}>
             <div className="title">
               {editMode ? (
-                <input type="text" value={sec.title} onChange={(e) => handleSectionNameChange(e, sec.id)} />
+                <input type="text" value={sec.heading} onChange={(e) => handleSectionNameChange(e, sec.id)} />
               ) : (
-                `${sec.title}`
+                `${sec.heading}`
               )}
             </div>
             {editMode && (
