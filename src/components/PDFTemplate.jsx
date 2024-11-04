@@ -1,4 +1,5 @@
 import { Page, Text, Document, StyleSheet, View, Font } from "@react-pdf/renderer";
+import { Fragment } from "react";
 
 Font.registerHyphenationCallback((word) => [word]);
 
@@ -33,6 +34,7 @@ export default function PDFTemplate() {
       display: "flex",
       textAlign: "center",
       width: "100%",
+      marginBottom: "4px",
     },
     sectionHeader: {
       fontSize: "20px",
@@ -151,20 +153,23 @@ export default function PDFTemplate() {
             );
           } else {
             // Sections
+            // Loop through each section.
             return (
-              <View key={item.title} style={styles.section}>
-                {/* Section Header */}
-                <Text style={[styles.name, styles.sectionHeader, idx === 0 && styles.topSection]}>Experience</Text>
-
-                {/* Section Content */}
+              <Fragment key={item.title}>
                 {JSON.parse(localStorage.getItem("sections")).map((section) => {
                   return (
-                    // Main container
-                    <View key={section.id}>
+                    // Section container
+                    <View key={section.id} style={styles.section}>
+                      {/* Header */}
+                      <Text style={[styles.name, styles.sectionHeader, idx === 0 && styles.topSection]}>
+                        {section.heading}
+                      </Text>
+
+                      {/* Content */}
                       {section.content.map((item) => {
                         return (
-                          // Section container
-                          <View key={item.id} wrap={false}>
+                          // Content container
+                          <View key={item.id}>
                             {/* Second level */}
                             <View style={[styles.secondLevel, { marginBottom: "3px" }]}>
                               <View>
@@ -178,6 +183,7 @@ export default function PDFTemplate() {
                                 </Text>
                               </View>
                             </View>
+
                             {/* Third level */}
                             <View style={styles.thirdLevel}>
                               {item.bulletPoints.map((point) => {
@@ -194,7 +200,7 @@ export default function PDFTemplate() {
                     </View>
                   );
                 })}
-              </View>
+              </Fragment>
             );
           }
         })}
