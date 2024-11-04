@@ -80,6 +80,9 @@ export default function PDFTemplate() {
       fontFamily: "Helvetica-Bold",
       textAlign: "left",
     },
+    topSection: {
+      marginTop: "8px",
+    },
   });
 
   return (
@@ -99,7 +102,7 @@ export default function PDFTemplate() {
               // Education section
               <View key={item.title} style={styles.section}>
                 {/* Education header */}
-                <Text style={[styles.name, styles.sectionHeader, { marginTop: idx === 0 && 8 }]}>{item.heading}</Text>
+                <Text style={[styles.name, styles.sectionHeader, idx === 0 && styles.topSection]}>{item.heading}</Text>
 
                 {/* Education content */}
                 {JSON.parse(localStorage.getItem("education")).map((item) => {
@@ -131,7 +134,7 @@ export default function PDFTemplate() {
             return (
               <View key={item.title} style={styles.section} wrap={false}>
                 {/* Header */}
-                <Text style={[styles.name, styles.sectionHeader, { marginTop: idx === 0 && 8 }]}>{item.heading}</Text>
+                <Text style={[styles.name, styles.sectionHeader, idx === 0 && styles.topSection]}>{item.heading}</Text>
 
                 {/* Content */}
                 <View wrap={false}>
@@ -151,7 +154,7 @@ export default function PDFTemplate() {
             return (
               <View key={item.title} style={styles.section}>
                 {/* Section Header */}
-                <Text style={[styles.name, styles.sectionHeader, { marginTop: idx === 0 && 8 }]}>{item.heading}</Text>
+                <Text style={[styles.name, styles.sectionHeader, idx === 0 && styles.topSection]}>Experience</Text>
 
                 {/* Section Content */}
                 {JSON.parse(localStorage.getItem("sections")).map((section) => {
