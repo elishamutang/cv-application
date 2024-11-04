@@ -25,7 +25,7 @@ export function PrintToPDF({ onClick }) {
   if (isMobile) {
     return (
       <button>
-        <PDFDownloadLink document={<PDFTemplate />} fileName="yourcv.pdf" style={{ color: "white" }}>
+        <PDFDownloadLink document={<PDFTemplate />} fileName="yourcv.pdf" style={{ color: "white", width: 100 }}>
           {({ blob, url, loading, error }) => {
             return loading ? "Loading.." : "Print PDF";
           }}
