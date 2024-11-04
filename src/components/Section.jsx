@@ -415,7 +415,7 @@ function Section({ moveSectionBtns, editMode }) {
     <>
       {section.map((sec) => {
         return (
-          <div className="section-container" id={sec.heading.toLowerCase()} key={sec.id}>
+          <div className="section-container" key={sec.id}>
             <div className="title">
               {editMode ? (
                 <input type="text" value={sec.heading} onChange={(e) => handleSectionNameChange(e, sec.id)} />
