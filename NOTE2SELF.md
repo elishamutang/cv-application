@@ -17,6 +17,7 @@
    12. ~~Make main nav stick.~~
    13. ~~Make it responsive.~~
    14. ~~Move the main nav bar outside of the A4 document.~~
+   15. ~~Update PDFTemplate code with new saved order object.~~
 
 3. Bugs
    1. ~~Fix education-section sizing issue when removing bullet points.~~
